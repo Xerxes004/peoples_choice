@@ -1,4 +1,4 @@
-use app;
+
 
 drop table writeIn;
 drop table vote;
@@ -6,11 +6,12 @@ drop table team;
 drop table implementation;
 drop table project;
 drop table student;
-
+create database app;
+use app;
 create table student(
 	username varchar(32) primary key,
 	realName varchar(32) not null,
-	pwHash numeric(32) not null
+	pwHash varchar(64) not null
 );
 
 
@@ -58,9 +59,9 @@ create table writeIn(
 
 insert into project values("Project1", "closed");
 
-insert into student values("sabol", "Joel Sabol", 292092834980230);
-insert into student values("kelly", "Wesley Kelly", 10938749807243);
-insert into student values("gallagd", "Dr. Gallagher", 321832132104621);
+insert into student values("sabol", "Joel Sabol", "password");
+insert into student values("kelly", "Wesley Kelly", "password");
+insert into student values("gallagd", "Dr. Gallagher", "password");
 
 insert into implementation values(1, "Joel's project");
 insert into implementation values(2, "Wes's Project");
