@@ -1,0 +1,1 @@
+<?php echo 'People\'s Choice works!'; ?>
