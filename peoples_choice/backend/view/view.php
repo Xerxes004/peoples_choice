@@ -9,7 +9,7 @@ class View
 		$this->page_view = $view_path;
 	}
 
-	public function display()
+	public function display($data)
 	{
 		require('head.php');
 

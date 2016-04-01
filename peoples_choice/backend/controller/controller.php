@@ -2,21 +2,22 @@
 
 require('backend/view/view.php');
 require('backend/model/login.php');
+require('backend/model/peoples_choice.php');
 
 class Controller
 {
 	public function renderPage()
 	{
+		$_SESSION['db'] = mysqli_connect("163.11.162.204", 'joel', 'password', 'app') or die("DB Connection Error");
+
 		switch($_SERVER['REQUEST_METHOD'])
 		{
 			case 'POST':
 				if ($_POST['username'] && $_POST['password'])
 				{
-					$_SESSION['db'] = mysqli_connect("192.168.1.122", 'joel', 'password', 'app') or die("DB Connection Error");
 					$login = new Login();
 					$login->validateUser($_POST['username'], $_POST['password']);
-					mysqli_close($_SESSION['db'])
-					unset($_SESSION['db']);
+					
 				}
 				break;
 
@@ -25,8 +26,10 @@ class Controller
 				{
 					case 'peoples_choice':
 					default:
+						$model = new PeoplesChoice();
+						$users = $model->getPeoplesChoiceData();
 						$page = new View('peoples_choice.php');
-						$page->display();
+						$page->display($users);
 						break;
 				}
 				break;
@@ -34,6 +37,8 @@ class Controller
 			default:
 				break;			
 		}
+		mysqli_close($_SESSION['db']);
+		unset($_SESSION['db']);
 	}
 }
 

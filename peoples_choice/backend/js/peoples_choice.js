@@ -17,7 +17,6 @@ $(document).ready(function(){
       var result = JSON.parse(data);
       if(result['login'] == true){
         $(".login-button").text(result['user']);
-        $(".jumbotron").append('<p>Login Success</p>');
         $("#login-modal").modal('hide');
       }else{
         var msg = '<div class="alert alert-danger" role="alert">Name and Password do not match</div>';

@@ -1,28 +1,4 @@
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
-    <title>People's Choice</title>
-
-    <link rel="stylesheet" type="text/css" href="login.css">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="backend/js/peoples_choice.js"></script>
-  </head>
-
-  <body>
     <!-- Login Modal -->
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog">
@@ -42,29 +18,63 @@
       </div>
     </div>
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
           </button>
           <a class="navbar-brand" href="#">People's Choice</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li ><a class="login-button" href="#" data-toggle="modal" data-target="#login-modal">Login<span class="sr-only">(current)</span></a></li>
+            <li><a href="#" class="login-button" data-toggle="modal" data-target="#login-modal"><?php echo$_SESSION['logged-in']? $_SESSION['username'] : '<span class="glyphicon glyphicon-log-in"></span> Log In' ?></a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
 
-    <div class="container">
 
-    </div> 
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2">
+          
+        </div>
+        <div class="col-sm-8 table-responsive">
+          <table class="table table-hover">
+            <thead class="thead-inverse">
+              <tr>
+                <?php 
+                  echo "<th></th>";
+                  $projs = $data['projects'];
+                  foreach ($projs as $proj) {
+                    echo "<th>$proj</th>";
+                  }
+                ?>
+              </tr>
+            </thead>
+            <tbody>
+              <?php 
+                $users = $data["users"];
+                foreach ($users as $user) {
+                  echo "<tr><td scope='row'>$user</td>";
+                  foreach ($projs as $proj) {
+                    echo "<td>score</td>";
+                  }
+                  echo '</tr>';
+                } 
+              ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-2">
+          
+        </div>
+      </div>
+      
+    </div>
