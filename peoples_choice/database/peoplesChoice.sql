@@ -5,13 +5,21 @@ drop table vote;
 drop table team;
 drop table implementation;
 drop table project;
+drop table admin;
 drop table student;
+
 create database app;
 use app;
+
 create table student(
 	username varchar(32) primary key,
 	realName varchar(32) not null,
 	pwHash varchar(64) not null
+);
+
+create table admin(
+	username varchar(32) primary key,
+	foreign key username references student(username)
 );
 
 
@@ -58,6 +66,8 @@ create table writeIn(
 );
 
 insert into project values("Project1", "closed");
+insert into project values("Project2", "closed");
+insert into project values("Project3", "closed");
 
 insert into student values("sabol", "Joel Sabol", "password");
 insert into student values("kelly", "Wesley Kelly", "password");

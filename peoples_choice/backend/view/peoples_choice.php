@@ -21,21 +21,40 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
+          <a class="navbar-brand" href="#">People's Choice</a>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>                        
           </button>
-          <a class="navbar-brand" href="#">People's Choice</a>
-        </div>
+          
+        </div> <!-- navbar-header -->
+
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Admin</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" class="login-button" data-toggle="modal" data-target="#login-modal"><?php echo$_SESSION['logged-in']? $_SESSION['username'] : '<span class="glyphicon glyphicon-log-in"></span> Log In' ?></a></li>
+          <?php 
+            $userVisible = $_SESSION['logged-in'] ? '':'hidden';
+            $loginVisible = $_SESSION['logged-in'] ? 'hidden':'';
+           ?>
+          <ul class='nav navbar-nav navbar-right'>";
+          
+            <li class="dropdown">
+            <?php echo "<a class='dropdown-toggle $userVisible' id='user-tab' data-toggle='dropdown' href='#'>".$_SESSION['username']; ?>
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" id="user-logout">Logout</a></li>
+                <li><a href="#">My Results</a></li>
+                <li><a href="#">My Votes</a></li> 
+              </ul>
+            </li>
+            <!--<li><a href="#" class="hidden" id="user-tab">uname</a></li>-->
+            <?php  echo "<li class='$loginVisible'>";?>
+            <a href="#" id="login-button" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
           </ul>
-        </div>
+        </div> <!-- navbar -->
       </div>
     </nav>
 

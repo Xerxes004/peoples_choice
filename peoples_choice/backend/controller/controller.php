@@ -13,12 +13,24 @@ class Controller
 		switch($_SERVER['REQUEST_METHOD'])
 		{
 			case 'POST':
-				if ($_POST['username'] && $_POST['password'])
-				{
-					$login = new Login();
-					$login->validateUser($_POST['username'], $_POST['password']);
-					
+				switch ($_POST['action']) {
+					case 'LOGIN':
+						if ($_POST['username'] && $_POST['password'])
+						{
+							$login = new Login();
+							$login->validateUser($_POST['username'], $_POST['password']);
+							
+						}
+						break;
+					case 'LOGOUT':
+						session_unset();
+						session_destroy();
+						break;
+					default:
+						# code...
+						break;
 				}
+				
 				break;
 
 			case 'GET':

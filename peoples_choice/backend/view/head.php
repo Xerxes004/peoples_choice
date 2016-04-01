@@ -21,7 +21,10 @@
 
 	    <!-- Latest compiled JavaScript -->
 	    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+<!--
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+-->
 	    <script src="backend/js/peoples_choice.js"></script>
 	</head>
 	<body>
