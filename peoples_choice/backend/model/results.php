@@ -19,7 +19,7 @@ class ResultsPage extends Model
 			$id = $team->id;
 			$tmp = '';
 			foreach ($team->members as $member) {
-				$tmp .= $member . ' ';
+				$tmp .= $member . '<br />';
 			}
 			array_push($na, $tmp);
 			unset($tmp);
