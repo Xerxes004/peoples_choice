@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="http://localhost/webapps/proj5/peoples_choice/">Home</a></li>
-            <li><a href="#">Admin</a></li>
+            <li><a href="http://localhost/webapps/proj5/peoples_choice/?page=admin">Admin</a></li>
           </ul>
           <?php 
             $userVisible = $_SESSION['logged-in'] ? '':'hidden';
