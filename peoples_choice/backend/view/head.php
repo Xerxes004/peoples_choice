@@ -27,5 +27,10 @@
 -->
 	    <script src="backend/js/peoples_choice.js"></script>
 	    <script src="backend/js/sha256.js"></script>
+
+	    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+	    <link rel="stylesheet" href="backend/styles/chart-style.css">
 	</head>
 	<body>

@@ -12,6 +12,7 @@ class View
 	public function display($data)
 	{
 		require('head.php');
+		require('header.php');
 
 		include($this->page_view);
 
