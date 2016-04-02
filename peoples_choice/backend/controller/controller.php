@@ -7,6 +7,7 @@ require('backend/model/peoples_choice.php');
 require('backend/model/team.php');
 require('backend/model/student.php');
 require('backend/model/project.php');
+require('backend/model/results.php');
 //require 'model.php';
 
 class Controller
@@ -46,8 +47,19 @@ class Controller
 						$page = new View('peoples_choice.php');
 						$page->display($data);
 						break;
+
 					case 'project_results':
-						#model = new 
+						$model = new ResultsPage();
+						$data = $model->getResultsData($_GET['proj']);
+						$page = new View('results.php');
+						$page->display($data);
+						break;
+
+					case 'admin':
+						#$model = new AdminPage();
+						#$data = $model->getAdminData();
+						$page = new View('admin.php');
+						$page->display('no data for admin yet');
 						break;
 				}
 				break;

@@ -5,7 +5,7 @@ $(document).ready(function(){
 
   $("#user-logout").click(function(evt){
     $.post('index.php', {action:"LOGOUT"});
-    $("#login-button").removeClass('hidden');
+    $("#login-field").removeClass('hidden');
     $("#user-tab").addClass('hidden');
   });
 
@@ -23,7 +23,7 @@ $(document).ready(function(){
         userTab.text(result['user']);
         userTab.append("<span class='caret'></span>")
         userTab.removeClass('hidden');
-        $("#login-button").addClass('hidden');
+        $("#login-field").addClass('hidden');
         $("#login-modal").modal('hide');
       }else{
         var msg = '<div class="alert alert-danger" role="alert">Name and Password do not match</div>';
@@ -39,4 +39,5 @@ $(document).ready(function(){
     $("#password").val('');
     $(".login-modal-error").empty();
   });
+
 });
