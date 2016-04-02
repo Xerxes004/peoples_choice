@@ -65,9 +65,9 @@ insert into project values("Project1", "closed");
 insert into project values("Project2", "closed");
 insert into project values("Project3", "closed");
 
-insert into student values("sabol", "Joel Sabol", "password");
-insert into student values("kelly", "Wesley Kelly", "password");
-insert into student values("gallagd", "Dr. Gallagher", "password");
+insert into student values("sabol", "Joel Sabol", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+insert into student values("kelly", "Wesley Kelly", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+insert into student values("gallagd", "Dr. Gallagher", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
 
 insert into implementation values(1);
 insert into implementation values(2);
@@ -91,6 +91,32 @@ select username, sum(value) score
 from vote
 where projectName="Project1"
 group by implementationID;
+
+select distinct implementationID
+from team
+where projectName="Project3";
+
+select *
+from 
+	(select count(value) bronze
+	from vote
+	where projectName='$project'
+	and implementationID='$teamid'
+	and value=1) t1,
+	(select count(value) silver
+	from vote
+	where projectName='$project'
+	and implementationID='$teamid'
+	and value=2)t2,
+	(select count(value) gold
+	from vote
+	where projectName='$project'
+	and implementationID='$teamid'
+	and value=3)t3,
+	(select sum(value) total
+	from vote
+	where projectName='$project'
+	and implementationID='$teamid')t4;
 
 select count(*)
 from vote
