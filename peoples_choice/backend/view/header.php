@@ -1,17 +1,17 @@
 <!-- Login Modal tabindex="-1"-->
     <script type="text/javascript">
-      function getUsers(){
-          return <?php 
-          $students = $data['students'];
-          $uname = [];
-          foreach ($students as $student) {
-            array_push($uname, array("id"=>$student->username, "text"=>$student->realName));
-          }
-          echo json_encode($uname);
-          echo ';';
-        ?>
-        console.log(data);
-      }
+        function getUsers() {
+            return <?php 
+            $students = $data['students'];
+            $uname = [];
+            foreach ($students as $student) {
+              array_push($uname, array("id"=>$student->username, "text"=>$student->realName));
+            }
+            echo json_encode($uname);
+            echo ';';
+          ?>
+          console.log(data);
+        }
       
     </script>
     <div class="modal fade" id="login-modal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -50,7 +50,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="http://localhost/webapps/proj5/peoples_choice/">Home</a></li>
-            <li><a href="#">Admin</a></li>
+            <li><a href="http://localhost/webapps/proj5/peoples_choice/?page=admin">Admin</a></li>
           </ul>
           <?php 
             $userVisible = $_SESSION['logged-in'] ? '':'hidden';

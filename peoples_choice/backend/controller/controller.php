@@ -9,6 +9,7 @@ require('backend/model/student.php');
 require('backend/model/project.php');
 require('backend/model/results.php');
 require('backend/model/vote.php');
+require('backend/model/admin.php');
 
 class Controller
 {
