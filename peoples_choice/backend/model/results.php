@@ -8,6 +8,8 @@ class ResultsPage extends Model
 		$votes = $vm->getAllVotesForProject($proj);
 		$tm = new TeamModel();
 		$teams = $tm->getTeamsForProject($proj);
+		$sm = new StudentModel();
+		$students = $sm->getStudents();
 
 		$fi = [];
 		$se = [];
@@ -52,7 +54,7 @@ class ResultsPage extends Model
 				  }
 			}";
 
-		return $jsonData;
+		return array('json' => $jsonData, 'students' => $students);
 	}
 }
 ?>
