@@ -7,7 +7,7 @@
 
 			# get the next id
 			$result = $this->queryInTransaction('select coalesce(max(implementationID), 0) miplid from implementation');
-			
+
 			# create the next implementation
 			$miplid = mysqli_fetch_assoc($result)['miplid'] + 1;
 			$this->queryInTransaction("insert into implementation values($miplid)");
@@ -59,11 +59,6 @@
 
 			return $teams;
 		}
-
-		public function queryDB()
-		{
-			# code...
-		}
 	}
 
 	/**
@@ -83,7 +78,7 @@
 			return $r;	
 		}
 
-		public function fullTeam($teamid, $project, $members)
+		public static function fullTeam($teamid, $project, $members)
 		{
 			$t = new Team();
 			$t->$teamid = $teamid;
@@ -91,6 +86,71 @@
 			$t->members = $members;
 			return $t;
 		}
-		
+	}
+
+	/**
+	* 
+	*/
+	class VoteModel extends Model
+	{
+		public function getVotesForProject($project)
+		{
+			$this->beginTransaction();
+			$teamModel = new TeamModel();
+			$teams = $teamModel->getTeamsForProject($project);
+
+			$votes = [];
+			foreach ($teams as $team) {
+				$project = $team->project;
+				$teamid = $team->teamid;
+				$voteResult = $this->queryInTransaction("select *
+				from 
+					(select count(value) bronze
+					from vote
+					where projectName='$project'
+					and implementationID='$teamid'
+					and value=1) t1,
+					(select count(value) silver
+					from vote
+					where projectName='$project'
+					and implementationID='$teamid'
+					and value=2)t2,
+					(select count(value) gold
+					from vote
+					where projectName='$project'
+					and implementationID='$teamid'
+					and value=3)t3,
+					(select sum(value) total
+					from vote
+					where projectName='$project'
+					and implementationID='$teamid')t4;");
+				$votes = [];
+				array_push($votes, Vote::score($vote['first'], $vote['second'], $vote['third'], $vote['total']));
+				
+			}
+			return $votes;
+		}
+	}
+
+	/**
+	* 
+	*/
+	class Vote
+	{
+		public $first;
+		public $second;
+		public $third;
+		public $total;
+		public $username;
+
+		static public function score($first, $second, $third, $total)
+		{
+			$v = new Vote();
+			$v->first = $first;
+			$v->second = $second;
+			$v->third = $third;
+			$v->total = $total;
+			return $v;
+		}
 	}
  ?>
