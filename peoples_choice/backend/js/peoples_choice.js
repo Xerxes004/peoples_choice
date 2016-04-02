@@ -34,15 +34,17 @@ $(document).ready(function(){
     });
   });
 
+  var myData = getUsers();
+
   $('.user-selector').select2({
     width:"100%",
     placeholder: "Select User",
     allowClear: true,
-    data:[{id:"sabol", text:"Joel Sabol"}, {id:"kelly", text:"Wesley Kelly"}, {id:"gallagd", text:"Gallagher"}]
+    data:myData
   });
   
   $('#login-modal').on('hide.bs.modal', function () {
-    $("#username").val('');
+    $("#username").select2('val', '');
     $("#password").val('');
     $(".login-modal-error").empty();
   });

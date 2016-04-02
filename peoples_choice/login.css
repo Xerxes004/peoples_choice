@@ -21,18 +21,12 @@
   position: relative;
 }
 
-.select2-container .select2-choice {
-        display: block!important;
-        height: 36px!important;
-        white-space: nowrap!important;
-        line-height: 26px!important;
-    }
-
 .loginmodal-container input[type=text], input[type=password]{
-  height: 44px;
-  line-height: 44px;
-  font-size: 16px;
+  height: 28px;
+  line-height: 28px;
+  font-size: 1em;
   width: 100%;
+  margin-top: 10px; 
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;

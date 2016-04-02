@@ -11,7 +11,7 @@
 
 	    <title>People's Choice</title>
 
-	    <link rel="stylesheet" type="text/css" href="login.css">
+	    
 
 	    <!-- Latest compiled and minified CSS -->
 	    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -27,7 +27,6 @@
 -->
 	    <script src="backend/js/peoples_choice.js"></script>
 	    <script src="backend/js/sha256.js"></script>
-	    <script src="backend/js/jaro.js"></script>
 
 	    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
@@ -36,7 +35,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
 
 	    <link rel="stylesheet" href="backend/styles/chart-style.css">
+	    <link rel="stylesheet" type="text/css" href="login.css">
 
-	    
 	</head>
 	<body>
