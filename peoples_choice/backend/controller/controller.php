@@ -42,9 +42,9 @@ class Controller
 					case 'peoples_choice':
 					default:
 						$model = new PeoplesChoiceModel();
-						$users = $model->getPeoplesChoiceData();
+						$data = $model->getPeoplesChoiceData();
 						$page = new View('peoples_choice.php');
-						$page->display($users);
+						$page->display($data);
 						break;
 					case 'project_results':
 						#model = new 

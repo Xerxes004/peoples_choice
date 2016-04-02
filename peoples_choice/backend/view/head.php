@@ -26,5 +26,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
 -->
 	    <script src="backend/js/peoples_choice.js"></script>
+	    <script src="backend/js/sha256.js"></script>
 	</head>
 	<body>

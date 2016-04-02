@@ -13,7 +13,8 @@ $(document).ready(function(){
     evt.preventDefault();
 
     var uname = $("#username").val();
-    var pass = $("#password").val();
+    var pass = Sha256.hash($("#password").val());
+    console.log(pass);
     
     $.post('index.php',{action:"LOGIN", username:uname, password:pass}, function(data){
       var result = JSON.parse(data);
