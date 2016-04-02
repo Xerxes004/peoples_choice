@@ -33,6 +33,13 @@ $(document).ready(function(){
       }
     });
   });
+
+  $('.user-selector').select2({
+    width:"100%",
+    placeholder: "Select User",
+    allowClear: true,
+    data:[{id:"sabol", text:"Joel Sabol"}, {id:"kelly", text:"Wesley Kelly"}, {id:"gallagd", text:"Gallagher"}]
+  });
   
   $('#login-modal').on('hide.bs.modal', function () {
     $("#username").val('');

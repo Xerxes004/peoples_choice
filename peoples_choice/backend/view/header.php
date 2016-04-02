@@ -1,9 +1,12 @@
-<!-- Login Modal -->
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<!-- Login Modal tabindex="-1"-->
+    <div class="modal fade" id="login-modal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog">
         <div class="loginmodal-container">
           <h1>Login</h1><br>
           <div class="login-modal-error"></div>
+          <select class="user-selector">
+            <option></option>
+          </select>
           <form id="login-form">
             <input type="text" name="user" id="username" placeholder="Username">
             <input type="password" name="pass" id="password" placeholder="Password">

@@ -27,10 +27,16 @@
 -->
 	    <script src="backend/js/peoples_choice.js"></script>
 	    <script src="backend/js/sha256.js"></script>
+	    <script src="backend/js/jaro.js"></script>
 
 	    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
+    	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+
 	    <link rel="stylesheet" href="backend/styles/chart-style.css">
+
+	    
 	</head>
 	<body>
