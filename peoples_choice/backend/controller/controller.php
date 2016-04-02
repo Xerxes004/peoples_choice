@@ -3,6 +3,11 @@
 require('backend/view/view.php');
 require('backend/model/login.php');
 require('backend/model/peoples_choice.php');
+//require('backend/model/model.php');
+require('backend/model/team.php');
+require('backend/model/student.php');
+require('backend/model/project.php');
+//require 'model.php';
 
 class Controller
 {
@@ -15,11 +20,9 @@ class Controller
 			case 'POST':
 				switch ($_POST['action']) {
 					case 'LOGIN':
-						if ($_POST['username'] && $_POST['password'])
-						{
+						if ($_POST['username'] && $_POST['password']){
 							$login = new Login();
-							$login->validateUser($_POST['username'], $_POST['password']);
-							
+							$login->validateUser($_POST['username'], $_POST['password']);	
 						}
 						break;
 					case 'LOGOUT':
@@ -38,10 +41,13 @@ class Controller
 				{
 					case 'peoples_choice':
 					default:
-						$model = new PeoplesChoice();
+						$model = new PeoplesChoiceModel();
 						$users = $model->getPeoplesChoiceData();
 						$page = new View('peoples_choice.php');
 						$page->display($users);
+						break;
+					case 'project_results':
+						#model = new 
 						break;
 				}
 				break;

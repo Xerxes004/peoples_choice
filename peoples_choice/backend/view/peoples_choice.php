@@ -72,16 +72,18 @@
                   echo "<th></th>";
                   $projs = $data['projects'];
                   foreach ($projs as $proj) {
-                    echo "<th>$proj</th>";
+                    echo "<th>$proj->name</th>";
                   }
                 ?>
               </tr>
             </thead>
             <tbody>
               <?php 
-                $users = $data["users"];
+                $users = $data["students"];
                 foreach ($users as $user) {
-                  echo "<tr><td scope='row'>$user</td>";
+                  $username = $user->username;
+                  $realName = $user->realName;
+                  echo "<tr><td scope='row'><a href='http://judah.cedarville.edu/~$username/cs4220.html'>$realName</a></td>";
                   foreach ($projs as $proj) {
                     echo "<td>score</td>";
                   }

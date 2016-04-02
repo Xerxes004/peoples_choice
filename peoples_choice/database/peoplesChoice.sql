@@ -8,9 +8,6 @@ drop table project;
 drop table admin;
 drop table student;
 
-create database app;
-use app;
-
 create table student(
 	username varchar(32) primary key,
 	realName varchar(32) not null,
@@ -19,7 +16,7 @@ create table student(
 
 create table admin(
 	username varchar(32) primary key,
-	foreign key username references student(username)
+	foreign key (username) references student(username)
 );
 
 
@@ -29,8 +26,7 @@ create table project(
 );
 
 create table implementation(
-	implementationID int primary key,
-	implementationName varchar(32)
+	implementationID int primary key
 );
 
 create table team(
@@ -73,13 +69,19 @@ insert into student values("sabol", "Joel Sabol", "password");
 insert into student values("kelly", "Wesley Kelly", "password");
 insert into student values("gallagd", "Dr. Gallagher", "password");
 
-insert into implementation values(1, "Joel's project");
-insert into implementation values(2, "Wes's Project");
-insert into implementation values(3, "G's Project");
+insert into implementation values(1);
+insert into implementation values(2);
+insert into implementation values(3);
+insert into implementation values(4);
+insert into implementation values(5);
 
 insert into team values("sabol", "Project1", 1);
 insert into team values("kelly", "Project1", 2);
 insert into team values("gallagd", "Project1", 3);
+insert into team values("gallagd", "Project2", 4);
+insert into team values("kelly", "Project2", 4);
+insert into team values("kelly", "Project3", 5);
+insert into team values("sabol", "Project3", 5);
 
 insert into vote values("kelly", "Project1", 2, 1);
 insert into vote values("gallagd", "Project1", 3, 2);
