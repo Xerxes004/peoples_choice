@@ -4,16 +4,33 @@ class ResultsPage extends Model
 {
 	public function getResultsData($proj)
 	{
-		$names = $this->getNames($proj);
-		$first = "['13','14','10']";
-		$second = "['9','11','10']";
-		$third = "['3','9','10']";
+		$vm = new VoteModel();
+		$votes = $vm->getAllVotesForProject($proj);
+		$tm = new TeamModel();
+		$teams = $tm->getTeamsForProject($proj);
 
-		$jsonData = 
-			"{
-			  	labels: $names,
-			  	series: [$first, $second, $third]
-			}, {
+		$fi = [];
+		$se = [];
+		$th = [];
+		$na = [];
+		foreach ($teams as $team) {
+			$id = $team->id;
+			$tmp = '';
+			foreach ($team->members as $member) {
+				$tmp .= $member . ' ';
+			}
+			array_push($na, $tmp);
+			unset($tmp);
+			$vote = $votes[$id];
+			array_push($fi, $vote->first);
+			array_push($se, $vote->second);
+			array_push($th, $vote->third);
+		}
+		$data['series'] = array($th, $se, $fi);
+		$data['labels'] = $na;
+
+		$jsonData = json_encode($data);
+		$jsonData .= ",{
 				seriesBarDistance: 5,
 			  	stackBars: true,
 			  	horizontalBars: true,
@@ -22,6 +39,7 @@ class ResultsPage extends Model
 			  		offset: 150
 			  	},
 			  	axisX: {
+			  		offset: 0,
       				labelInterpolationFnc: function (value, index) {
       					return index % 5 === 0 ? value : null;
       				}
@@ -35,11 +53,6 @@ class ResultsPage extends Model
 			}";
 
 		return $jsonData;
-	}
-
-	private function getNames($proj)
-	{
-		return "['Wes','Joel','Andrew']";
 	}
 }
 ?>
