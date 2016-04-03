@@ -59,6 +59,15 @@ $(document).ready(function(){
     allowClear: true,
     data:myData
   });  
+
+  $(".draggable").on('touchmove', function(e) {
+    var touches = e.originalEvent.changedTouches[0];
+    $(e.currentTarget).css('left', touches.pageX - 25 + 'px');
+    $(e.currentTarget).css('top', touches.pageY - 25 + 'px');
+    e.preventDefault();
+  });
+
+
 });
 
 
