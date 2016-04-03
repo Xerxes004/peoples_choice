@@ -41,9 +41,8 @@ class ResultsPage extends Model
 			  		offset: 150
 			  	},
 			  	axisX: {
-			  		offset: 0,
       				labelInterpolationFnc: function (value, index) {
-      					return index % 5 === 0 ? value : null;
+      					return index % 5 === 0 ? index : null;
       				}
     			},
 			}).on('draw', function(data) {
