@@ -38,4 +38,11 @@
 	    <link rel="stylesheet" href="backend/styles/style.css">
 	    <link rel="stylesheet" type="text/css" href="login.css">
 
+	    <script type="text/javascript">
+	    	var myData = <?php 
+	    		echo json_encode($data);
+	    	 ?>;
+	    	 console.log(myData);
+	    </script>
+
 	</head>

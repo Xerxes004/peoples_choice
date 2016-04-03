@@ -1,14 +1,20 @@
 $(document).ready(function(){
+
+	/********************************************************************************
+	 * Header and modal functions
+	 ********************************************************************************/
   $('#login-modal').on('shown.bs.modal', function () {
     $('#username').focus();
   });
 
+  // Logs a user out when clicked in the menu
   $("#user-logout").click(function(evt){
     $.post('index.php', {action:"LOGOUT"});
     $("#login-field").removeClass('hidden');
     $("#user-tab").addClass('hidden');
   });
 
+  // Handles the submission of the login modal
   $("#login-form").submit(function(evt){
     evt.preventDefault();
 
@@ -34,61 +40,81 @@ $(document).ready(function(){
     });
   });
 
-  $("#user-modification-form").submit(function(){
-
-  });
-
-  $("#user-select").change(function(evt){
-    $("#new-name").val($("#user-select option:selected").text());
-    $("#new-linux").val($("#user-select").val());
-  });
-
-  $("#project-dropdown").select2({
-    width:"100%",
-    placeholder: "Select Project",
-    allowClear: true
-  });
-
-  $("#user-select").select2({
-    width:"100%",
-    placeholder: "Select User",
-    allowClear: true
-  });
-  
+    // Clears the modal when it is hidden
   $('#login-modal').on('hide.bs.modal', function () {
     $("#username").select2('val', '');
     $("#password").val('');
     $(".login-modal-error").empty();
   });
 
+  // Creates the selector in the login modal
   $('.user-selector').select2({
     width:"100%",
     placeholder: "Select User",
     allowClear: true,
   });  
 
+  /********************************************************************************
+	 * Admin view functions
+	 ********************************************************************************/
+
+  // Handles the user selection in the Admin view
+  $("#user-select").on('select2:select', function(){
+    $("#new-name").val($("#user-select option:selected").text());
+    var linuxName = $("#user-select").val();
+    var student = myData['students'][linuxName];
+    $("#new-linux").val(student['username']);
+    $("#update-admin-checkbox").prop("checked", student['isAdmin']);
+  });
+
+  // Handles the unselection of a user in the Admin view
+  $("#user-select").on('select2:unselect', function(){
+  	console.log("here");
+  });
+
+  // Project dropdown creation in Admin view
+  $("#project-dropdown").select2({
+    width:"100%",
+    placeholder: "Select Project",
+    allowClear: true
+  });
+
+  //
+  $("#user-select").select2({
+    width:"100%",
+    placeholder: "Select User",
+    allowClear: true
+  });
+  
   $(".draggable").on('touchmove', function(e) {
     var touches = e.originalEvent.changedTouches[0];
     $(e.currentTarget).css('left', touches.pageX - 25 + 'px');
     $(e.currentTarget).css('top', touches.pageY - 25 + 'px');
     e.preventDefault();
   });
-
-
 });
 
 
 function addUser(e) {
   e.preventDefault();
 
+  // Gets the new linux username, real name, and admin status from the form
   var linux_user = $("#add-linux").val();
   var name = $("#add-user").val();
   var admin = $("#add-admin-checkbox").prop("checked");
+  var	pwHash = Sha256.hash("password");
+  // If there are legitimate values, send the request
   if(linux_user != '' && name != ''){
-  	$.post("./", {action:"CREATE_STUDENT", username:linux_user, realName:name, pwHash:Sha256.hash("password"), admin:admin}, function(data){
+  	$.post("./", {action:"CREATE_STUDENT", username:linux_user, realName:name, pwHash:pwHash, admin:admin}, function(data){
+  		// If the request was successful update the page
   		if(JSON.parse(JSON.parse(data)['CREATE_STUDENT']) == true){
-  			$("#user-select").append('<option value="' + linux_user + '">' + name + '</option>');
+  			myData['students'].push({isAdmin:admin, pwHash:pwHash, realName:name, username:linux_user});
+  			// Insert the new user into the selector
+  			$("#user-select").append('<option value="' + (myData['students'].length-1) + '">' + name + '</option>');
+  			// Update the select2 selector
   			initSelect2("#user-select");
+
+  			// Display the success notification for 2s
 			  $("#user-added").removeClass("hide");
 			  $("#user-added>#msg").html(
 			    "<strong>Success!</strong> " +
@@ -111,6 +137,7 @@ function deleteUser(e){
 				var option = $("#user-select option:selected");
 				option.remove();
 				initSelect2("#user-select");
+				displayNotification();
 			}
 		});
 	}
@@ -152,7 +179,7 @@ function updateUser(e){
 				var option = $("#user-select option:selected");
 				option.val(username);
 				option.text(realName);
-				initSelect2("#user-selector");
+				initSelect2("#user-select");
 				displayNotification();
 			}
 		});
@@ -168,6 +195,10 @@ function resetPassword(){
 		});
 	}
 }
+
+/********************************************************************************
+* Voting functions
+********************************************************************************/
 
 function allowDrop(e) {
   e.preventDefault();

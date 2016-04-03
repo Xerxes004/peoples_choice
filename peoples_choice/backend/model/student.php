@@ -21,11 +21,16 @@
 		public function getStudents(){
 			$this->beginTransaction();
 
-			$result = $this->queryInTransaction("select * from student");
+			$result = $this->queryInTransaction("select s.username, realName, pwHash, coalesce(a.username, 'false') isAdmin
+			 from student s left join admin a on s.username=a.username");
 
 			$students = [];
 			while ($row = mysqli_fetch_assoc($result)) {
-				array_push($students, Student::fullStudent($row['username'], $row['realName'], $row['pwHash']));
+				$isAdmin = false;
+				if($row['isAdmin'] != 'false'){
+					$isAdmin = true;
+				}
+				array_push($students, Student::fullWAdmin($row['username'], $row['realName'], $row['pwHash'], $isAdmin));
 			}
 			$this->endTransaction;
 
@@ -48,6 +53,16 @@
 			$student->username = $username;
 			$student->realName = $realName;
 			$student->pwHash = $pwHash;
+			return $student;
+		}
+
+		public static function fullWAdmin($username, $realName, $pwHash, $isAdmin)
+		{
+			$student = new Student();
+			$student->username = $username;
+			$student->realName = $realName;
+			$student->pwHash = $pwHash;
+			$student->isAdmin = $isAdmin;
 			return $student;
 		}
 

@@ -1,20 +1,22 @@
 <ul class="nav nav-tabs">
-	<li class="active"><a data-toggle="tab" href="#user-admin">User Administration</a></li>
+	<li class="active"><a data-toggle="tab" href="#user-admin">Student Administration</a></li>
 	<li><a data-toggle="tab" href="#project-admin">Project Administration</a></li>
 </ul>
 <div class="tab-content">
 
 	<div id="user-admin" class="tab-pane fade in active">
-		<h2>User Administration</h2>
+		<h2>Student Administration</h2>
 		<div class="form-group">
-		  <label for="user-select">Select User:</label>
+		  <label for="user-select">Select Student:</label>
 		  <select class="form-control" id="user-select">
 		  	<option></option>
 		    <?php 
-		    	foreach ($data['students'] as $student) {
+
+		    	foreach ($data['students'] as $key => $student) {
 		    		$username = $student->username;
 		    		$realName = $student->realName;
-		    		echo "<option value='$username'>$realName<option>";
+		    		
+		    		echo "<option value='$key'>$realName<option>";
 		    	}
 		     ?>
 		  </select>
