@@ -34,7 +34,7 @@
     	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
 
-	    <link rel="stylesheet" href="backend/styles/chart-style.css">
+		<link rel="stylesheet" href="backend/styles/chart-style.css">
 	    <link rel="stylesheet" href="backend/styles/style.css">
 	    <link rel="stylesheet" type="text/css" href="login.css">
 

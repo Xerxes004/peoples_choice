@@ -26,3 +26,7 @@
 .voting-panel .panel {
 	border: 1px solid #ebf3fa;
 }
+
+.voting-panel .team {
+	display: block;
+}
