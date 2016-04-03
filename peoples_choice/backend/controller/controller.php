@@ -57,8 +57,8 @@ class Controller
 						break;
 
 					case 'admin':
-						#$model = new AdminPage();
-						#$data = $model->getAdminData();
+						//$model = new AdminPage();
+						//$data = $model->getAdminData();
 						$page = new View('admin.php');
 						$page->display('no data for admin yet');
 						break;

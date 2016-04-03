@@ -34,6 +34,24 @@ $(document).ready(function(){
     });
   });
 
+  $("#project-dropdown").select2({
+    width:"100%",
+    placeholder: "Select Project",
+    allowClear: true,
+  });
+
+  $("#user-select").select2({
+    width:"100%",
+    placeholder: "Select User",
+    allowClear: true,
+  });
+  
+  $('#login-modal').on('hide.bs.modal', function () {
+    $("#username").select2('val', '');
+    $("#password").val('');
+    $(".login-modal-error").empty();
+  });
+
   var myData = getUsers();
 
   $('.user-selector').select2({
@@ -42,11 +60,7 @@ $(document).ready(function(){
     allowClear: true,
     data:myData
   });
+
   
-  $('#login-modal').on('hide.bs.modal', function () {
-    $("#username").select2('val', '');
-    $("#password").val('');
-    $(".login-modal-error").empty();
-  });
 
 });
