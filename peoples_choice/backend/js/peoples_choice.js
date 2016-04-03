@@ -175,6 +175,9 @@ function allowDrop(e) {
 
 function drag(e) {
   e.dataTransfer.setData("text", e.target.id);
+  if ($("#"+e.target.id).closest('.vote-area') != null) {
+    $("#"+e.target.id).closest('.vote-area').addClass('droppable');
+  }
 }
 
 function drop(e) {
@@ -182,6 +185,11 @@ function drop(e) {
   
   var data = e.dataTransfer.getData("text");
 
-  $(e.target.closest(".droppable")).append(document.getElementById(data));
-  
+  var droppable = e.target.closest(".droppable");
+
+  $(droppable).append(document.getElementById(data));
+
+  if ($(droppable).hasClass('vote-area')) {
+    $(droppable).removeClass('droppable');
+  }
 }
