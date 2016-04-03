@@ -13,16 +13,7 @@
 
 <div class="panel panel-default">
 	<div class="panel-body">
-		<div class="panel panel-default">
-			<div class="panel-heading"><h2>Teams</h2></div>
-			<div class="panel-body droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<div id="teamID1" class="team" draggable="true" ondragstart="drag(event)">team1</div>
-				<div id="teamID2" class="team" draggable="true" ondragstart="drag(event)">team2</div>
-				<div id="teamID3" class="team" draggable="true" ondragstart="drag(event)">team3</div>
-				<div id="teamID4" class="team" draggable="true" ondragstart="drag(event)">team4</div>
-			</div>
-		</div>
-
+		
 		<div class="row">
 			<div class="col-sm-4">
 				<div class=" panel panel-default">
@@ -48,6 +39,17 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Teams</div>
+			<div class="panel-body droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<div id="teamID1" class="team draggable" draggable="true" ondragstart="drag(event)">team1</div>
+				<div id="teamID2" class="team draggable" draggable="true" ondragstart="drag(event)">team2</div>
+				<div id="teamID3" class="team draggable" draggable="true" ondragstart="drag(event)">team3</div>
+				<div id="teamID4" class="team draggable" draggable="true" ondragstart="drag(event)">team4</div>
+			</div>
+		</div>
+
 		<button>Cast Ballot</button>
 	</div>
 </div>

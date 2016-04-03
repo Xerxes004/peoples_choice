@@ -66,6 +66,15 @@ $(document).ready(function(){
     placeholder: "Select User",
     allowClear: true,
   });  
+
+  $(".draggable").on('touchmove', function(e) {
+    var touches = e.originalEvent.changedTouches[0];
+    $(e.currentTarget).css('left', touches.pageX - 25 + 'px');
+    $(e.currentTarget).css('top', touches.pageY - 25 + 'px');
+    e.preventDefault();
+  });
+
+
 });
 
 
