@@ -25,12 +25,40 @@ class Controller
 						if ($_POST['username'] && $_POST['password']){
 							$login = new Login();
 							$login->validateUser($_POST['username'], $_POST['password']);	
+						}else{
+							echo '{"login":"false"}';
 						}
 						break;
 					case 'LOGOUT':
 						session_unset();
 						session_destroy();
 						break;
+					case "CREATE_STUDENT":
+						$am = new AdminModel();
+						$success = $am->createStudent($_POST['username'], $_POST['realName'], $_POST['pwHash'], $_POST['admin'])?'true':'false';
+						echo(json_encode(array("CREATE_STUDENT"=>$success)));
+						break;
+					case 'DESTROY_STUDENT':
+						$am = new AdminModel();
+						$success = $am->destroyStudent($_POST['username']);
+						echo(json_encode(array("DESTROY_STUDENT"=>$success)));
+						break;
+
+					case 'UPDATE_STUDENT':
+						$am = new AdminModel();
+						$success = $am->updateStudent($_POST['username'], $_POST['realName'], $_POST['admin'], $_POST['primarykey'])?'true':'false';
+						//echo("'UPDATE_STUDENT':'$success'");
+						echo(json_encode(array("UPDATE_STUDENT"=>$success)));
+						break;
+					case 'RESET_PASSWORD':
+						$am = new AdminModel();
+						$am->resetPassword($_POST['username'], $_POST['pwHash']);
+						break;
+					case 'CREATE_PROJECT':
+					case 'DESTROY_PROJECT':
+					case 'CREATE_TEAM':
+					case 'DESTROY_TEAM':
+					break;
 					default:
 						# code...
 						break;
@@ -39,34 +67,38 @@ class Controller
 				break;
 
 			case 'GET':
-				switch($_GET['page'])
-				{
-					case 'peoples_choice':
+				switch ($_GET['action']) {
+					case 'data':
+						# code...
+						break;
+					case 'page':
 					default:
-						$model = new PeoplesChoiceModel();
-						$data = $model->getPeoplesChoiceData();
-						$page = new View('peoples_choice.php');
-						$page->display($data);
-						break;
+						switch($_GET['page'])
+						{
+							case 'project_results':
+								$model = new ResultsPage();
+								$data = $model->getResultsData($_GET['proj']);
+								$page = new View('results.php');
+								$page->display($data);
+								break;
 
-					case 'project_results':
-						$model = new ResultsPage();
-						$data = $model->getResultsData($_GET['proj']);
-						$page = new View('results.php');
-						$page->display($data);
-						break;
-
-					case 'admin':
-						//$model = new AdminPage();
-						//$data = $model->getAdminData();
-						$page = new View('admin.php');
-						$page->display('no data for admin yet');
+							case 'admin':
+								$model = new AdminModel();
+								$data = $model->getAdminData();
+								$page = new View('admin.php');
+								$page->display($data);
+								break;
+							case 'peoples_choice':
+							default:
+								$model = new PeoplesChoiceModel();
+								$data = $model->getPeoplesChoiceData();
+								$page = new View('peoples_choice.php');
+								$page->display($data);
+								break;
+						}
 						break;
 				}
-				break;
-
-			default:
-				break;			
+				
 		}
 		mysqli_close($_SESSION['db']);
 		unset($_SESSION['db']);

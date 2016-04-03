@@ -34,16 +34,25 @@ $(document).ready(function(){
     });
   });
 
+  $("#user-modification-form").submit(function(){
+
+  });
+
+  $("#user-select").change(function(evt){
+    $("#new-name").val($("#user-select option:selected").text());
+    $("#new-linux").val($("#user-select").val());
+  });
+
   $("#project-dropdown").select2({
     width:"100%",
     placeholder: "Select Project",
-    allowClear: true,
+    allowClear: true
   });
 
   $("#user-select").select2({
     width:"100%",
     placeholder: "Select User",
-    allowClear: true,
+    allowClear: true
   });
   
   $('#login-modal').on('hide.bs.modal', function () {
@@ -51,28 +60,104 @@ $(document).ready(function(){
     $("#password").val('');
     $(".login-modal-error").empty();
   });
-  var myData = getUsers();
 
   $('.user-selector').select2({
     width:"100%",
     placeholder: "Select User",
     allowClear: true,
-    data:myData
   });  
 });
 
 
 function addUser(e) {
   e.preventDefault();
+
   var linux_user = $("#add-linux").val();
   var name = $("#add-user").val();
-  console.log("Linux username: " + linux_user);
-  console.log("Name: " + name);
-  $("#user-added").removeClass("hide");
-  $("#user-added>#msg").html(
-    "<strong>Success!</strong> " +
-    name + " was successfully added to the system."
-    );
+  var admin = $("#add-admin-checkbox").prop("checked");
+  if(linux_user != '' && name != ''){
+  	$.post("./", {action:"CREATE_STUDENT", username:linux_user, realName:name, pwHash:Sha256.hash("password"), admin:admin}, function(data){
+  		if(JSON.parse(JSON.parse(data)['CREATE_STUDENT']) == true){
+  			$("#user-select").append('<option value="' + linux_user + '">' + name + '</option>');
+  			initSelect2("#user-select");
+			  $("#user-added").removeClass("hide");
+			  $("#user-added>#msg").html(
+			    "<strong>Success!</strong> " +
+			    name + " was successfully added to the system."
+			    );
+			  	setTimeout(function(){
+			  		$("#user-added").addClass("hide");
+			  	}, 2000);
+  		}
+  	});
+  }
+}
+
+function deleteUser(e){
+	if($("#user-select").val() != ''){
+		$.post('./', {action:"DESTROY_STUDENT", username:$("#new-linux").val()}, function(data){
+			if(JSON.parse(JSON.parse(data)['DESTROY_STUDENT']) == true){
+				$("#new-linux").val('');
+				$("#new-name").val('');
+				var option = $("#user-select option:selected");
+				option.remove();
+				initSelect2("#user-select");
+			}
+		});
+	}
+	
+}
+
+function displayNotification(){
+	$("#user-updated").removeClass("hide");
+	  $("#user-updated>#update-msg").html(
+	    "<strong>Success!</strong> " +
+	    name + " was successfully updated in the system."
+	    );
+	  	setTimeout(function(){
+	  		$("#user-updated").addClass("hide");
+	  	}, 2000);
+}
+
+function initSelect2(selector){
+	var sel2 = $(selector);
+	sel2.select2("destroy");
+	sel2.select2({width:"100%",
+		placeholder: "Select User",
+		allowClear: true});
+}
+
+function updateUser(e){
+	if($("#user-select").val() != ''){
+		var newLinux = $("#new-linux");
+		var newName = $("#new-name");
+		var username = newLinux.val();
+		var realName = newName.val();
+		var admin = $("#update-admin-checkbox").prop("checked");
+		var primarykey = $("#user-select").val();
+		$.post('./', {action:"UPDATE_STUDENT", username:username, realName:realName, admin:admin, primarykey:primarykey}, function(data){
+			console.log(data, $.parseJSON("true"));
+			if(JSON.parse(JSON.parse(data)['UPDATE_STUDENT']) == true){
+				newLinux.val(username);
+				newName.val(realName);
+				var option = $("#user-select option:selected");
+				option.val(username);
+				option.text(realName);
+				initSelect2("#user-selector");
+				displayNotification();
+			}
+		});
+	}
+}
+
+function resetPassword(){
+	if($("#user-select").val() != ''){
+		$.post('./', {action:"RESET_PASSWORD", username:$("#new-linux").val(), pwHash:Sha256.hash('password')}, function(data){
+			if(JSON.parse(JSON.parse(data)['RESET_PASSWORD']) == true){
+				
+			}
+		});
+	}
 }
 
 function allowDrop(e) {

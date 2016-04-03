@@ -1,25 +1,5 @@
 <!-- Login Modal tabindex="-1"-->
-    <script type="text/javascript">
-        function getUsers() {
-            var data = <?php 
-            
-            if(isset($data['students'])){
-              $students = $data['students'];
-              $uname = [];
-              foreach ($students as $student) {
-                array_push($uname, array("id"=>$student->username, "text"=>$student->realName));
-              }
-              echo json_encode($uname);
-              echo ';';
-            }else{
-              echo '[{id:"2", text:"failed"}];';
-            }
-          ?>
-          console.log(data);
-          return data;
-        }
-      
-    </script>
+    
     <div class="modal fade" id="login-modal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog">
         <div class="loginmodal-container">
@@ -29,6 +9,14 @@
           <form id="login-form">
             <select id="username" class="user-selector">
               <option></option>
+              <?php
+                $students = $data['students']; 
+                foreach ($students as $student) {
+                  $username = $student->username;
+                  $realName = $student->realName;
+                  echo("<option value='$username'>$realName<option>");
+                }
+               ?>
             </select>
             <input type="password" name="pass" id="password" placeholder="Password">
             <input type="submit" name="login" class="login loginmodal-submit" id="login-submit-button" value="Login">

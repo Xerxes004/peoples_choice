@@ -41,7 +41,7 @@
 		public $username;
 		public $realName;
 		public $pwHash;
-
+		public $isAdmin;
 		public static function fullStudent($username, $realName, $pwHash)
 		{
 			$student = new Student();
@@ -49,6 +49,11 @@
 			$student->realName = $realName;
 			$student->pwHash = $pwHash;
 			return $student;
+		}
+
+		public function setAdmin($isAdmin)
+		{
+			$this->isAdmin = $isAdmin;
 		}
 	}
 ?>
