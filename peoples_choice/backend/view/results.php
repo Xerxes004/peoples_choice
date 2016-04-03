@@ -48,5 +48,6 @@
 				</div>
 			</div>
 		</div>
+		<button>Cast Ballot</button>
 	</div>
 </div>
