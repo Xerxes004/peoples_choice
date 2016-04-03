@@ -30,11 +30,19 @@
 					<p><button>Save</button><p>
 
 					<h2>Add User</h2>
+					<div class="alert alert-success hide">
+					  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				      <strong>Success!</strong> This alert box could indicate a successful or positive action.
+				    </div>
 					<div class="form-group">
 					  <label for="usr">Name:</label>
-					  <input type="text" class="form-control" id="usr">
+					  <input type="text" class="form-control" id="add-user-input">
 					</div>
-					<button>Add User</button>
+					<div class="form-group">
+					  <label for="usr">Linux Username:</label>
+					  <input type="text" class="form-control" id="add-user-input">
+					</div>
+					<button click="addUser">Add User</button>
 				</div>
 
 				<div id="project-admin" class="tab-pane fade in">
@@ -47,6 +55,9 @@
 					    <option>Project3</option>
 					    <option>Project4</option>
 					  </select>
+					  <div class="well checkbox">
+						<label class="inline-checkbox"><input type="checkbox" value="admin">Open Project</label>
+					  </div>
 					</div>
 				</div>
 

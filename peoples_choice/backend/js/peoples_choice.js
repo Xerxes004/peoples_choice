@@ -49,4 +49,7 @@ $(document).ready(function(){
     $(".login-modal-error").empty();
   });
 
+  function addUser () {
+    $('#add-user-input').text('success');
+  }
 });
