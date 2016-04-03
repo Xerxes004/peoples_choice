@@ -58,7 +58,19 @@ $(document).ready(function(){
     placeholder: "Select User",
     allowClear: true,
     data:myData
-  });
-
-  
+  });  
 });
+
+
+function addUser(e) {
+  e.preventDefault();
+  var linux_user = $("#add-linux").val();
+  var name = $("#add-user").val();
+  console.log("Linux username: " + linux_user);
+  console.log("Name: " + name);
+  $("#user-added").removeClass("hide");
+  $("#user-added>#msg").html(
+    "<strong>Success!</strong> " +
+    name + " was successfully added to the system."
+    );
+}

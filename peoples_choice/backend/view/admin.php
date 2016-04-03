@@ -12,37 +12,39 @@
 
 				<div id="user-admin" class="tab-pane fade in active">
 					<h2>User Administration</h2>
-					<div class="form-group">
-					  <label for="user-select">Select User:</label>
-					  <select class="form-control" id="user-select">
-					  	<option></option>
-					    <option>user1</option>
-					    <option>user2</option>
-					    <option>user3</option>
-					    <option>user4</option>
-					  </select>
-					</div>
-					<div class="well checkbox">
-						<label><input type="checkbox" value="admin">Admin</label>
-						<button style="margin-left: 20px;">Reset Password</button>
-						<button>Delete User</button>
-					</div>
-					<p><button>Save</button><p>
+					<form>
+						<div class="form-group">
+						  <label for="user-select">Select User:</label>
+						  <select class="form-control" id="user-select">
+						  	<option></option>
+						    <option>user1</option>
+						    <option>user2</option>
+						    <option>user3</option>
+						    <option>user4</option>
+						  </select>
+						</div>
+						<div class="well checkbox">
+							<label><input type="checkbox" value="admin">Admin</label>
+							<button style="margin-left: 20px;">Reset Password</button>
+							<button>Delete User</button>
+						</div>
+						<p><button>Save</button><p>
+					</form>
 
 					<h2>Add User</h2>
-					<div class="alert alert-success hide">
-					  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				      <strong>Success!</strong> This alert box could indicate a successful or positive action.
-				    </div>
-					<div class="form-group">
-					  <label for="usr">Name:</label>
-					  <input type="text" class="form-control" id="add-user-input">
-					</div>
-					<div class="form-group">
-					  <label for="usr">Linux Username:</label>
-					  <input type="text" class="form-control" id="add-user-input">
-					</div>
-					<button click="addUser">Add User</button>
+						<div id="user-added" class="alert alert-success hide">
+						  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				     	  <div id="msg"></div>
+					    </div>
+						<div class="form-group">
+						  <label for="usr">Name:</label>
+						  <input type="text" class="form-control" id="add-user">
+						</div>
+						<div class="form-group">
+						  <label for="usr">Linux Username:</label>
+						  <input type="text" class="form-control" id="add-linux">
+						</div>
+						<button onclick="addUser(event)">Add User</button>
 				</div>
 
 				<div id="project-admin" class="tab-pane fade in">
