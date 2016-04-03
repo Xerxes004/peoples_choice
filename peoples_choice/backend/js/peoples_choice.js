@@ -182,7 +182,7 @@ function drag(e) {
 
 function drop(e) {
   e.preventDefault();
-  
+
   var data = e.dataTransfer.getData("text");
 
   var droppable = e.target.closest(".droppable");

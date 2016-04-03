@@ -1,9 +1,10 @@
 .team {
-	border: 1px solid #adcceb;
 	padding: 5px 10px;
 	margin: 5px;
 	border-radius: 5px;
-	background: #adcceb;
+	background: lightgrey;
+	color: #5a5a5a;
+	display: inline-table;
 }
 
 .panel-default .first {
@@ -20,4 +21,8 @@
 
 .first, .second, .third {
 	text-align: center;
+}
+
+.voting-panel .panel {
+	border: 1px solid #ebf3fa;
 }
