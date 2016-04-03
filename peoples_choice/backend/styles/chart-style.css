@@ -1,3 +1,8 @@
+footer {
+	position: static;
+	bottom: 0;
+}
+
 .ct-label {
 	font-size: 12pt;
 }
