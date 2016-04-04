@@ -71,19 +71,24 @@
 
 		public function createProject($projectName)
 		{
-			
+			$this->beginTransaction();
+			$this->queryInTransaction("insert into project values('$projectName') on duplicate key update name='$projectName'");
+			return $this->endTransaction();
 		}
 
 		public function destroyProject($projectName)
 		{
-			
+			$this->beginTransaction();
+			$this->queryInTransaction("insert into project values('$projectName') on duplicate key update name='$projectName'");
+			return $this->endTransaction();
 		}
 
 		
 
 		public function createTeam($team)	
 		{
-			
+			$this->beginTransaction();
+			$this->queryInTransaction("insert into team values");
 		}
 
 		public function destroyTeam($teamid)

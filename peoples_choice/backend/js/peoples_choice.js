@@ -85,6 +85,11 @@ $(document).ready(function(){
     allowClear: true
   });
 
+  $("#project-dropdown").change( function(){
+		console.log("selected");
+		console.log($('input[name="project-open"]:checked').val());
+	});
+
   //
   $("#user-select").select2({
     width:"100%",
@@ -99,6 +104,8 @@ $(document).ready(function(){
     e.preventDefault();
   });
 });
+
+
 
 function addOneStudentPerTeam() {
   //$("#team-select")
