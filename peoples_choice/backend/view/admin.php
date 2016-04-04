@@ -78,9 +78,17 @@
 						    ?>
 						  </select>
 						  <div class="well radio">
-							<label class="radio-inline"><input type="radio" name="project-open" value="open">Open Project</label>
-							<label class="radio-inline"><input type="radio" name="project-open" value="close" checked="checked">Close Project</label>
-						  	<label class="radio-inline"><input type="radio" name="project-open" value="delete" checked="checked">Delete Project</label>
+						  	<div class="row">
+								<div class="col-sm-4">
+									<label class="radio"><input type="radio" name="project-open" value="open">Open Project</label>
+								</div>
+								<div class="col-sm-4">
+									<label class="radio"><input type="radio" name="project-open" value="close" checked="checked">Close Project</label>
+								</div>
+							  	<div class="col-sm-4">
+							  		<label class="radio"><input type="radio" name="project-open" value="delete" checked="checked">Delete Project</label>
+							  	</div>
+						    </div>
 						  </div>
 						  <button onclick="">Save</button>
 						</div>	
