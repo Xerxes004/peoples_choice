@@ -101,21 +101,29 @@ $(document).ready(function(){
 });
 
 function addOneStudentPerTeam() {
-  //$("#team-select")
+  var students = $("#team-select").find('.student');
+  $.each(students, function(index, student) {
+    var divName = makeTeamDiv($(student).attr('id'));
+    $(student).appendTo("#"+divName+" .panel-body");
+  });
 }
 
 function makeTeamDiv(teamName) {
-  var numTeams = $("#team-area").data("numteams");
-  var str = "<div class='panel panel-default' id='"+teamName+"'>"+
+  var numTeams = $("#team-area").data("numteams") + 1;
+
+  var str = "<div class='panel panel-default team' id='"+teamName+"team'>"+
             "<div class='panel-heading'>"+
             "<b>Team "+numTeams+"</b>"+
             "</div>"+
-            "<div class='panel-body droppable' ondrop='drop(event)' ondragover='allowDrop(event)'>"+
+            "<div class='panel-body droppable' ondrop='dropTeam(event)' ondragover='allowDrop(event)'>"+
             "</div>"+
             "</div>";
+
   $("#team-area").append(str);
 
-  $("#team-area").data("numteams", numTeams + 1);
+  $("#team-area").data("numteams", numTeams);
+
+  return teamName + "team";
 }
 
 
@@ -255,4 +263,15 @@ function drop(e) {
   if ($(droppable).hasClass('vote-area')) {
     $(droppable).removeClass('droppable');
   }
+}
+
+function dropTeam(e) {
+  drop(e);
+  var panelID = e.target.closest('.panel').id;
+  var studentID = e.dataTransfer.getData("text");
+  if (panelID === 'new') {
+    e.target.closest('.panel').id = studentID +"team";    
+  } else {
+    e.target.closest('.panel').id += ":"+studentID+"team";
+  } 
 }
