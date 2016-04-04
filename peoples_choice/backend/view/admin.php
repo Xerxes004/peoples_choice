@@ -4,6 +4,7 @@
 			<li class="active"><a data-toggle="tab" href="#user-admin">User Administration</a></li>
 			<li><a data-toggle="tab" href="#project-admin">Project Administration</a></li>
 			<li><a data-toggle="tab" href="#team-admin">Team Administration</a></li>
+			<li><a data-toggle="tab" href="#danger-admin">Danger Administration</a></li>
 		</ul>
 	</div>
 		<div class="tab-content panel-body">
@@ -107,6 +108,21 @@
 
 			<div id="team-admin" class="tab-pane fade in panel panel-default">
 				<div class="row panel-body">
+					<div class="col-sm-12">
+						<label for="team-project-dropdown">Select Project:</label>
+					    <select class="form-control" id="team-project-dropdown">
+					    	<option></option>
+						    <?php 
+						    	foreach ($data['projects'] as $project) {
+						    		$name = $project->name;
+						    		echo "<option value=$name'>$name<option>";
+						    	}
+						    ?>
+					    </select>
+					</div>
+				</div>
+
+				<div class="row panel-body">
 					<div class="col-sm-6">
 					  <h2>Students</h2>
 					  <div class="well droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="team-select">
@@ -122,20 +138,17 @@
 					</div>
 					<div class="col-sm-6">
 						<h2>Teams</h2>
-						<div id="team-area" data-numteams="0">
-							<!-- <div class="panel panel-default" id="first:second">
-								<div class="panel-heading">
-									<b>Team 1</b>
-								</div>
-								<div class="panel-body droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-					            </div>
-					        </div> -->
-					    </div>
 				        <button onclick="makeTeamDiv()">Add Team</button>
 				        <button onclick="saveTeams()">Save Teams</button>
+						<div id="team-area" data-numteams="0">
+							
+					    </div>
 					</div>
 				</div>
 			</div>
 
+			<div id="danger-admin" class="tab-pane fade in panel panel-default">
+
+			</div>
 		</div>
 	</div>

@@ -108,6 +108,12 @@ $(document).ready(function(){
     placeholder: "Select User",
     allowClear: true
   });
+
+  $("#team-project-dropdown").select2({
+    width:"100%",
+    placeholder: "Select User",
+    allowClear: true
+  });
   
   $(".draggable").on('touchmove', function(e) {
     var touches = e.originalEvent.changedTouches[0];
@@ -127,14 +133,46 @@ function addOneStudentPerTeam() {
   });
 }
 
-function makeTeamDiv(teamName) {
+function deleteTeam(e) {
+  var teamDiv = $(e.target).closest('.team-box');
+  var members = $(teamDiv).find('.student');
+  var teamnum = $(teamDiv).data('teamnum');
+
+  for (var i = 0; i < members.length + 1; i++) {
+    $(members[i]).appendTo('#team-select');
+  }
+
+  decrementTeamNums(teamnum);
+  teamDiv.remove();
+}
+
+function decrementTeamNums(teamnum) {
+  var teams = $("#team-area").find('.team-box');
+  var numteams = $("#team-area").data("numteams");
+
+  for (var i = 0; i < numteams; i++) {
+    if ($(teams[i]).data('teamnum') > teamnum) {
+      $(teams[i]).data('teamnum', $(teams[i]).data('teamnum') - 1);
+      renameTeam(teams[i]);
+    }
+  }
+
+  $("#team-area").data("numteams", $("#team-area").data("numteams") - 1);
+}
+
+function renameTeam(team) {
+  $(team).find('#team-name').text("Team " + $(team).data('teamnum'));
+}
+
+function makeTeamDiv() {
   var numTeams = $("#team-area").data("numteams") + 1;
 
-  var str = "<div class='panel panel-default team' id='"+teamName+"team'>"+
+  var str = "<div class='panel panel-default team-box' data-teamnum='"+numTeams+"' id='team"+numTeams+"'>"+
             "<div class='panel-heading'>"+
-            "<b>Team "+numTeams+"</b>"+
+            "<b id='team-name'>Team "+numTeams+"</b>"+
+            "<button style='float:right' onclick='deleteTeam(event)'>Remove</button>"+
             "</div>"+
-            "<div class='panel-body droppable' ondrop='dropTeam(event)' ondragover='allowDrop(event)'>"+
+            "<div class='panel-body droppable' ondrop='drop(event)' ondragover='allowDrop(event)'>"+
             "</div>"+
             "</div>";
 
@@ -142,7 +180,7 @@ function makeTeamDiv(teamName) {
 
   $("#team-area").data("numteams", numTeams);
 
-  return teamName + "team";
+  return "team" + numTeams;
 }
 
 
@@ -225,7 +263,7 @@ function deleteUser(e){
 	
 }
 
-function displayNotification(){
+function displayNotification() {
 	$("#user-updated").removeClass("hide");
 	  $("#user-updated>#update-msg").html(
 	    "<strong>Success!</strong> " +
@@ -234,6 +272,19 @@ function displayNotification(){
 	  	setTimeout(function(){
 	  		$("#user-updated").addClass("hide");
 	  	}, 2000);
+}
+
+function displayNotification(insertLocationID, message) {
+  var alert = '<div id="alert-box" class="alert alert-success hide">'+
+              '<a href="#" class="close" data-dismiss="alert" aria-label="close"></a>'+
+              '<div id="update-msg"></div>'+
+              '</div>';
+
+  $("#"+insertLocationID).append("<strong>Success!</strong> " +message);
+
+  setTimeout(function(){
+    $("#user-updated").addClass("hide");
+  }, 2000);
 }
 
 function initSelect2(selector){
@@ -308,15 +359,4 @@ function drop(e) {
   if ($(droppable).hasClass('vote-area')) {
     $(droppable).removeClass('droppable');
   }
-}
-
-function dropTeam(e) {
-  drop(e);
-  var panelID = e.target.closest('.panel').id;
-  var studentID = e.dataTransfer.getData("text");
-  if (panelID === 'new') {
-    e.target.closest('.panel').id = studentID +"team";    
-  } else {
-    e.target.closest('.panel').id += ":"+studentID+"team";
-  } 
 }

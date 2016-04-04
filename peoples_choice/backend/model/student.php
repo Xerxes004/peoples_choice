@@ -22,7 +22,7 @@
 			$this->beginTransaction();
 
 			$result = $this->queryInTransaction("select s.username, realName, pwHash, coalesce(a.username, 'false') isAdmin
-			 from student s left join admin a on s.username=a.username");
+			 from student s left join admin a on s.username=a.username order by realName asc");
 
 			$students = [];
 			while ($row = mysqli_fetch_assoc($result)) {
