@@ -23,10 +23,8 @@
 				  </select>
 				</div>
 				<div class="well">
-					<div id="user-updated" class="alert alert-success hide">
-					  <a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
-			     	  <div id="update-msg"></div>
-				    </div>
+
+				  <div id="user-mod-notify"></div>
 					<div class="form-group">
 					  <label for="new-name">Change Full Name:</label>
 					  <input type="text" class="form-control" id="new-name">
@@ -45,10 +43,7 @@
 
 				<h3>User Add</h3>
 				<div class="well">
-					<div id="user-added" class="alert alert-success hide">
-					  <a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
-			     	  <div id="msg"></div>
-				    </div>
+					<div id="user-add-notify"></div>
 					<div class="form-group">
 					  <label for="usr">Name:</label>
 					  <input type="text" class="form-control" id="add-user">

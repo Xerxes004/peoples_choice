@@ -24,7 +24,7 @@ class Controller
 					$am = new AdminModel();
 					switch ($_POST['action']) {
 						case "CREATE_STUDENT":
-							$success = $am->createStudent($_POST['username'], $_POST['realName'], $_POST['pwHash'], $_POST['admin'])?'true':'false';
+							$success = $am->createStudent($_POST['username'], $_POST['realName'], $_POST['pwHash'], json_decode($_POST['admin']));
 							echo(json_encode(array("CREATE_STUDENT"=>$success)));
 							break;
 						case 'DESTROY_STUDENT':
@@ -91,6 +91,15 @@ class Controller
 			case 'GET':
 				switch ($_GET['action']) {
 					case 'data':
+						switch ($_GET['data']) {
+							case 'TEAM':
+								# code...
+								break;
+							
+							default:
+								# code...
+								break;
+						}
 						# code...
 						break;
 					case 'page':
