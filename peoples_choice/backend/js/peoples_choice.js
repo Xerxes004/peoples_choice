@@ -225,7 +225,7 @@ function deleteUser(e){
 	
 }
 
-function displayNotification(){
+function displayNotification() {
 	$("#user-updated").removeClass("hide");
 	  $("#user-updated>#update-msg").html(
 	    "<strong>Success!</strong> " +
@@ -234,6 +234,19 @@ function displayNotification(){
 	  	setTimeout(function(){
 	  		$("#user-updated").addClass("hide");
 	  	}, 2000);
+}
+
+function displayNotification(insertLocationID, message) {
+  var alert = '<div id="alert-box" class="alert alert-success hide">'+
+              '<a href="#" class="close" data-dismiss="alert" aria-label="close"></a>'+
+              '<div id="update-msg"></div>'+
+              '</div>';
+
+  $("#"+insertLocationID).append("<strong>Success!</strong> " +message);
+
+  setTimeout(function(){
+    $("#user-updated").addClass("hide");
+  }, 2000);
 }
 
 function initSelect2(selector){

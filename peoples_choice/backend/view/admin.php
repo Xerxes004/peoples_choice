@@ -4,6 +4,7 @@
 			<li class="active"><a data-toggle="tab" href="#user-admin">User Administration</a></li>
 			<li><a data-toggle="tab" href="#project-admin">Project Administration</a></li>
 			<li><a data-toggle="tab" href="#team-admin">Team Administration</a></li>
+			<li><a data-toggle="tab" href="#danger-admin">Danger Administration</a></li>
 		</ul>
 	</div>
 		<div class="tab-content panel-body">
@@ -144,6 +145,10 @@
 					    </div>
 					</div>
 				</div>
+			</div>
+
+			<div id="danger-admin" class="tab-pane fade in panel panel-default">
+
 			</div>
 		</div>
 	</div>
