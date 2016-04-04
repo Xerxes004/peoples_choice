@@ -17,6 +17,7 @@
 			if($result->num_rows == 1){
 				$row = mysqli_fetch_assoc($result);
 				if($row['username'] == $user && $row['pwHash'] == $password){
+					session_start();
 					$_SESSION['logged-in'] = true;
 					$_SESSION['username'] = $row['realName'];
 					$_SESSION['isAdmin'] = $row['isAdmin'] == 'false' ? false:true;

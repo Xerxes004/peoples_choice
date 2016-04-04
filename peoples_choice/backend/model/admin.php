@@ -13,7 +13,13 @@
 			$pm = new ProjectModel();
 			$projects = $pm->getProjects();
 
-			return array("students"=>$students, "projects"=>$projects);
+			$tm = new TeamModel();
+			foreach ($projects as $project) {
+				$projectName = $project->name;
+				$teams["$projectName"] = $tm->getTeamsForProject($projectName);
+			}
+
+			return array("students"=>$students, "projects"=>$projects, "teams"=>$teams);
 		}
 
 		public function getStudent($username){
