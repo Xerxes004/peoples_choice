@@ -40,12 +40,20 @@ class Controller
 							echo(json_encode(array("RESET_PASSWORD"=>$success)));
 							break;
 						case 'CREATE_PROJECT':
-							$success = $am->createProject($_POST['project']);
+							$success = $am->createProject($_POST['project'], 'closed');
 							echo(json_encode(array("CREATE_PROJECT"=>$success)));
+							break;
+						case 'OPEN_PROJECT':
+							$success = $am->updateProject($_POST['project'], 'open');
+							echo(json_encode(array("OPEN_PROJECT"=>$success)));
+							break;
+						case 'CLOSE_PROJECT':
+							$success  = $am->updateProject($POST['project'], 'closed');
+							echo(json_encode(array("CLOSE_PROJECT"=>$success)));
 							break;
 						case 'DESTROY_PROJECT':
 							$success = $am->destroyProject($_POST['project']);
-							echo(json_encode(array("CREATE_PROJECT"=>$success)));
+							echo(json_encode(array("DESTROY_PROJECT"=>$success)));
 							break;
 						case 'CREATE_TEAM':
 						case 'DESTROY_TEAM':
@@ -78,9 +86,6 @@ class Controller
 							break;
 					}
 				}
-				
-				
-				
 				break;
 
 			case 'GET':

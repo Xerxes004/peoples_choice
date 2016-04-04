@@ -75,7 +75,7 @@
 						    <?php 
 						    	foreach ($data['projects'] as $project) {
 						    		$name = $project->name;
-						    		echo "<option value=$name'>$name<option>";
+						    		echo "<option value='$name'>$name<option>";
 						    	}
 						    ?>
 						  </select>
@@ -89,7 +89,7 @@
 									</div>
 						    </div>
 						  </div>
-						  <button onclick="">Save</button>
+						  <button onclick="saveProject()">Save</button>
 						</div>	
 					</div>
 					<div class="col-sm-6">

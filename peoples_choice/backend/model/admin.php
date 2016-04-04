@@ -69,22 +69,28 @@
 			return $this->endTransaction();
 		}
 
-		public function createProject($projectName)
+		public function createProject($projectName, $status)
 		{
 			$this->beginTransaction();
-			$this->queryInTransaction("insert into project values('$projectName') on duplicate key update name='$projectName'");
+			$this->queryInTransaction("insert into project values('$projectName', '$status') on duplicate key update name='$projectName'");
+			return $this->endTransaction();
+		}
+
+		public function updateProject($projectName, $status)
+		{
+			$this->beginTransaction();
+			$this->queryInTransaction("update project set status='$status' where name='$projectName'");
 			return $this->endTransaction();
 		}
 
 		public function destroyProject($projectName)
 		{
 			$this->beginTransaction();
-			$this->queryInTransaction("insert into project values('$projectName') on duplicate key update name='$projectName'");
+			$this->queryInTransaction("delete from team where project='$projectName'");
+			$this->queryInTransaction("delete from project where name='$projectName'");
 			return $this->endTransaction();
 		}
-
 		
-
 		public function createTeam($team)	
 		{
 			$this->beginTransaction();
