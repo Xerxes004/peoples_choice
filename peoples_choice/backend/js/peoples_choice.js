@@ -167,7 +167,7 @@ function renameTeam(team) {
 function makeTeamDiv() {
   var numTeams = $("#team-area").data("numteams") + 1;
 
-  var str = "<div class='panel panel-default team-box' data-teamnum='"+numTeams+"' id='team"+numTeams+"'>"+
+  var $str = "<div class='panel panel-default team-box' data-teamnum='"+numTeams+"' id='team"+numTeams+"'>"+
             "<div class='panel-heading'>"+
             "<b id='team-name'>Team "+numTeams+"</b>"+
             "<button style='float:right' onclick='deleteTeam(event)'>Remove</button>"+
@@ -176,7 +176,7 @@ function makeTeamDiv() {
             "</div>"+
             "</div>";
 
-  $("#team-area").append(str);
+  $("#team-area").append($str);
 
   $("#team-area").data("numteams", numTeams);
 
