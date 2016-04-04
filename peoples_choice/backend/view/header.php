@@ -44,7 +44,11 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="./">Home</a></li>
-            <li><a href="?page=admin">Admin</a></li>
+            <?php 
+              $adminClass = $_SESSION['isAdmin'] ? '':'hidden';
+              echo "<li id='admin-link-header' class='$adminClass'><a href='?page=admin'>Admin</a></li>";
+             ?>
+            
           </ul>
           <?php 
             $userVisible = $_SESSION['logged-in'] ? '':'hidden';

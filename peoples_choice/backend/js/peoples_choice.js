@@ -12,6 +12,7 @@ $(document).ready(function(){
     $.post('index.php', {action:"LOGOUT"});
     $("#login-field").removeClass('hidden');
     $("#user-tab").addClass('hidden');
+    $("#admin-link-header").addClass('hidden');
   });
 
   // Handles the submission of the login modal
@@ -25,6 +26,9 @@ $(document).ready(function(){
     $.post('index.php',{action:"LOGIN", username:uname, password:pass}, function(data){
       var result = JSON.parse(data);
       if(result['login'] == true){
+      	if(result['isAdmin']){
+      		$("#admin-link-header").removeClass('hidden');
+      	}
         var userTab = $("#user-tab");
         userTab.text(result['user']);
         userTab.append("<span class='caret'></span>")

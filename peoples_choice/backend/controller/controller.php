@@ -83,11 +83,13 @@ class Controller
 								break;
 
 							case 'admin':
-								$model = new AdminModel();
-								$data = $model->getAdminData();
-								$page = new View('admin.php');
-								$page->display($data);
-								break;
+								if($_SESSION['logged-in'] && $_SESSION['isAdmin']){
+									$model = new AdminModel();
+									$data = $model->getAdminData();
+									$page = new View('admin.php');
+									$page->display($data);
+									break;
+								}
 							case 'peoples_choice':
 							default:
 								$model = new PeoplesChoiceModel();
