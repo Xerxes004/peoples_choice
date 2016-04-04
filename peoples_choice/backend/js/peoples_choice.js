@@ -85,9 +85,21 @@ $(document).ready(function(){
     allowClear: true
   });
 
-  $("#project-dropdown").change( function(){
-		console.log("selected");
-		console.log($('input[name="project-open"]:checked').val());
+  $("#project-dropdown").on('select2:select', function(){
+		var projIdx = $(this).val();
+		var project = myData['projects'][projIdx];
+		$projectName = $("#project-dropdown").val();
+		switch(project['status']){
+			case 'closed':
+				$("#close-radio").prop("checked", true);
+				break;
+			case 'open':
+				$("#open-radio").prop("checked", true);
+				break;
+			default:
+				break;
+		}
+		
 	});
 
   //
@@ -169,6 +181,32 @@ function addUser(e) {
   	});
   }
 }
+
+function saveProject(){
+		switch($('input[name="project-open"]:checked').val()){
+			case 'open':
+				projectName = $("#project-dropdown").val();
+				$.post('./', {action:"OPEN_PROJECT", project:projectName}, function(data){
+					if(JSON.parse(JSON.parse(data)['OPEN_PROJECT']) == true){
+						
+					}
+				});
+				break;
+			case 'close':
+				projectName = $("#project-dropdown").val();
+				$.post('./', {action:"CLOSE_PROJECT", project:projectName}, function(data){
+					//verify action
+				});
+				break;
+			case 'delete':
+				saveprojectName = $("#project-dropdown").val();
+				$.post('./', {action:"DELETE_PROJECT", project:projectName}, function(data){
+					//verify action
+				});
+			default:
+				break;
+		}
+	}
 
 function deleteUser(e){
 	if($("#user-select").val() != ''){

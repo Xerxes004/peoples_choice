@@ -13,7 +13,7 @@
 
 			$projects = [];
 			while ($row = mysqli_fetch_assoc($result)) {
-				array_push($projects, Project::fullProject($row['name'], $row['status']));
+				$projects[$row['name']] = Project::fullProject($row['name'], $row['status']);
 			}
 
 			$this->endTransaction();
@@ -32,14 +32,14 @@
 
 		static public function name($name){
 			$p = new Project();
-			$p->$name = $name;
+			$p->name = $name;
 			return $p;
 		}
 
 		static public function status($status)
 		{
 			$p = new Project();
-			$p->$status = $status;
+			$p->status = $status;
 			return $p;
 		}
 
@@ -47,7 +47,7 @@
 		{
 			$p = new Project();
 			$p->name = $name;
-			$p->$status = $status;
+			$p->status = $status;
 			return $p;
 		}
 	}

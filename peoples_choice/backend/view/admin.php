@@ -74,24 +74,24 @@
 						    <?php 
 						    	foreach ($data['projects'] as $project) {
 						    		$name = $project->name;
-						    		echo "<option value=$name'>$name<option>";
+						    		echo "<option value='$name'>$name<option>";
 						    	}
 						    ?>
 						  </select>
 						  <div class="well radio">
 						  	<div class="row">
 								<div class="col-sm-4">
-									<label class="radio"><input type="radio" name="project-open" value="open">Open Project</label>
+									<label class="radio"><input id="open-radio" type="radio" name="project-open" value="open">Open Project</label>
 								</div>
 								<div class="col-sm-4">
-									<label class="radio"><input type="radio" name="project-open" value="close" checked="checked">Close Project</label>
+									<label class="radio"><input id="close-radio" type="radio" name="project-open" value="close" checked="checked">Close Project</label>
 								</div>
 							  	<div class="col-sm-4">
-							  		<label class="radio"><input type="radio" name="project-open" value="delete" checked="checked">Delete Project</label>
+							  		<label class="radio"><input id="delete-radio" type="radio" name="project-open" value="delete" checked="checked">Delete Project</label>
 							  	</div>
 						    </div>
 						  </div>
-						  <button onclick="">Save</button>
+						  <button onclick="saveProject()">Save</button>
 						</div>	
 					</div>
 					<div class="col-sm-6">
