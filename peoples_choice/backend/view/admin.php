@@ -13,10 +13,9 @@
 					  <select class="form-control" id="user-select">
 					  	<option></option>
 					    <?php 
-					    	foreach ($data['students'] as $student) {
-					    		$username = $student->username;
+					    	foreach ($data['students'] as $key => $student) {
 					    		$realName = $student->realName;
-					    		echo "<option value='$username'>$realName<option>";
+					    		echo "<option value='$key'>$realName<option>";
 					    	}
 					     ?>
 					  </select>
