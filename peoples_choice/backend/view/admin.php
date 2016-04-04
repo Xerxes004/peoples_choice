@@ -1,15 +1,15 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#user-admin">User Administration</a></li>
-			<li><a data-toggle="tab" href="#project-admin">Project Administration</a></li>
-			<li><a data-toggle="tab" href="#team-admin">Team Administration</a></li>
-			<li><a data-toggle="tab" href="#danger-admin">Danger Administration</a></li>
+		<ul class="nav nav-pills nav-justified">
+			<li class="active"><a data-toggle="tab" href="#user-admin">User</a></li>
+			<li><a data-toggle="tab" href="#project-admin">Project</a></li>
+			<li><a data-toggle="tab" href="#team-admin">Team</a></li>
+			<li><a data-toggle="tab" href="#danger-admin">Danger</a></li>
 		</ul>
 	</div>
 		<div class="tab-content panel-body">
 			<div id="user-admin" class="tab-pane fade in active">
-				<h2>User Administration</h2>
+				<h3>User Administration</h3>
 				<div class="form-group">
 				  <label for="user-select">Select User:</label>
 				  <select class="form-control" id="user-select">
@@ -43,7 +43,7 @@
 					<button onclick="updateUser(event)">Update</button>
 				</div>
 
-				<h2>User Add</h2>
+				<h3>User Add</h3>
 				<div class="well">
 					<div id="user-added" class="alert alert-success hide">
 					  <a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
@@ -67,7 +67,7 @@
 			<div id="project-admin" class="tab-pane fade in panel panel-default">
 				<div class="row panel-body">
 					<div class="col-sm-6">
-						<h2>Project Administration</h2>
+						<h3>Project Administration</h3>
 						<div class="form-group">
 						  <label for="project-dropdown">Select Project:</label>
 						  <select class="form-control" id="project-dropdown">
@@ -81,22 +81,19 @@
 						  </select>
 						  <div class="well radio">
 						  	<div class="row">
-								<div class="col-sm-4">
-									<label class="radio"><input type="radio" name="project-open" value="open">Open Project</label>
-								</div>
-								<div class="col-sm-4">
-									<label class="radio"><input type="radio" name="project-open" value="close" checked="checked">Close Project</label>
-								</div>
-							  	<div class="col-sm-4">
-							  		<label class="radio"><input type="radio" name="project-open" value="delete" checked="checked">Delete Project</label>
-							  	</div>
+									<div class="col-sm-6">
+										<label class="radio"><input type="radio" name="project-open" value="open">Open Project</label>
+									</div>
+									<div class="col-sm-6">
+										<label class="radio"><input type="radio" name="project-open" value="close" checked="checked">Close Project</label>
+									</div>
 						    </div>
 						  </div>
 						  <button onclick="">Save</button>
 						</div>	
 					</div>
 					<div class="col-sm-6">
-						<h2>Project Add/Delete</h2>
+						<h3>Set number of projects</h3>
 		                <div class="form-group">
 						  <label for="usr">Project Name:</label>
 						  <input type="text" class="form-control" id="add-project">
@@ -123,8 +120,11 @@
 				</div>
 
 				<div class="row panel-body">
-					<div class="col-sm-6">
-					  <h2>Students</h2>
+					<div class="col-md-3">
+					  <h3>Students</h3>
+					  <p>
+					  	<button onclick="addOneStudentPerTeam()" id="one-per-team">One Student Per Team</button>
+					  </p>
 					  <div class="well droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="team-select">
 					    <?php 
 					    	foreach ($data['students'] as $student) {
@@ -134,21 +134,26 @@
 					    	}
 					    ?>
 					  </div>
-					  <button onclick="addOneStudentPerTeam()" id="one-per-team">One Student Per Team</button>
 					</div>
-					<div class="col-sm-6">
-						<h2>Teams</h2>
+					<div class="col-md-9">
+						<h3>Teams</h3>
 				        <button onclick="makeTeamDiv()">Add Team</button>
 				        <button onclick="saveTeams()">Save Teams</button>
 						<div id="team-area" data-numteams="0">
 							
-					    </div>
+				    </div>
 					</div>
 				</div>
 			</div>
 
 			<div id="danger-admin" class="tab-pane fade in panel panel-default">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					</div>
 
+					<div class="panel-body">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

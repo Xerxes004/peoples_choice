@@ -25,8 +25,6 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
 -->
-	    <script src="backend/js/peoples_choice.js"></script>
-	    <script src="backend/js/sha256.js"></script>
 
 	    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
@@ -37,6 +35,9 @@
 		<link rel="stylesheet" href="backend/styles/chart-style.css">
 	    <link rel="stylesheet" href="backend/styles/style.css">
 	    <link rel="stylesheet" type="text/css" href="login.css">
+
+	    <script src="backend/js/peoples_choice.js"></script>
+	    <script src="backend/js/sha256.js"></script>
 
 	    <script type="text/javascript">
 	    	var myData = <?php 
