@@ -60,16 +60,18 @@ $(document).ready(function(){
 
   // Handles the user selection in the Admin view
   $("#user-select").on('select2:select', function(){
-    $("#new-name").val($("#user-select option:selected").text());
-    var linuxName = $("#user-select").val();
-    var student = myData['students'][linuxName];
+  	var linuxName = $("#user-select").val();
+  	var student = myData['students'][linuxName];
+    $("#new-name").val(student['realName']);
     $("#new-linux").val(student['username']);
     $("#update-admin-checkbox").prop("checked", student['isAdmin']);
   });
 
   // Handles the unselection of a user in the Admin view
   $("#user-select").on('select2:unselect', function(){
-  	console.log("here");
+  	$("#new-linux").val('');
+  	$("#new-name").val('');
+  	$("#update-admin-checkbox").prop("checked", false);
   });
 
   // Project dropdown creation in Admin view
@@ -114,6 +116,9 @@ function addUser(e) {
   			// Update the select2 selector
   			initSelect2("#user-select");
 
+  			$("#add-linux").val('');
+  			$("#add-user").val('');
+
   			// Display the success notification for 2s
 			  $("#user-added").removeClass("hide");
 			  $("#user-added>#msg").html(
@@ -137,6 +142,7 @@ function deleteUser(e){
 				var option = $("#user-select option:selected");
 				option.remove();
 				initSelect2("#user-select");
+				$("#update-admin-checkbox").prop("checked", false);
 				displayNotification();
 			}
 		});
