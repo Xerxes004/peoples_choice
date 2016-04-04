@@ -176,15 +176,19 @@ function updateUser(e){
 		var username = newLinux.val();
 		var realName = newName.val();
 		var admin = $("#update-admin-checkbox").prop("checked");
-		var primarykey = $("#user-select").val();
+		var primarykey = myData['students'][$("#user-select").val()]['username'];
 		$.post('./', {action:"UPDATE_STUDENT", username:username, realName:realName, admin:admin, primarykey:primarykey}, function(data){
 			console.log(data, $.parseJSON("true"));
 			if(JSON.parse(JSON.parse(data)['UPDATE_STUDENT']) == true){
+				var studentIdx = $("#user-select").val();
+				var student = myData['students'][studentIdx];
+				student['username'] = username;
+				student['realName'] = realName;
+				student['isAdmin'] = admin;
+
 				newLinux.val(username);
 				newName.val(realName);
-				var option = $("#user-select option:selected");
-				option.val(username);
-				option.text(realName);
+				$("#user-select option:selected").text(realName);
 				initSelect2("#user-select");
 				displayNotification();
 			}
