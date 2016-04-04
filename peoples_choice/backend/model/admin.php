@@ -30,6 +30,7 @@
 		{
 			$this->beginTransaction();
 			$this->queryInTransaction("insert into student values('$username', '$realName', '$pwHash')");
+
 			if($admin){
 				$this->queryInTransaction("insert into admin values('$username')");
 			}
@@ -65,7 +66,7 @@
 		public function resetPassword($username, $password)
 		{
 			$this->beginTransaction();
-			$this->queryInTransaction("update student set password='$password' where username='$username'");
+			$this->queryInTransaction("update student set pwHash='$password' where username='$username'");
 			return $this->endTransaction();
 		}
 
@@ -90,7 +91,7 @@
 			$this->queryInTransaction("delete from project where name='$projectName'");
 			return $this->endTransaction();
 		}
-		
+
 		public function createTeam($team)	
 		{
 			$this->beginTransaction();

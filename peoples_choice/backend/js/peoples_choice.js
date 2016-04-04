@@ -191,6 +191,7 @@ function addUser(e) {
   var linux_user = $("#add-linux").val();
   var name = $("#add-user").val();
   var admin = $("#add-admin-checkbox").prop("checked");
+  console.log(admin);
   var	pwHash = Sha256.hash("password");
   // If there are legitimate values, send the request
   if(linux_user != '' && name != ''){
@@ -206,15 +207,7 @@ function addUser(e) {
   			$("#add-linux").val('');
   			$("#add-user").val('');
 
-  			// Display the success notification for 2s
-			  $("#user-added").removeClass("hide");
-			  $("#user-added>#msg").html(
-			    "<strong>Success!</strong> " +
-			    name + " was successfully added to the system."
-			    );
-			  	setTimeout(function(){
-			  		$("#user-added").addClass("hide");
-			  	}, 2000);
+  			displayNotification("add-user-notify", "Successfully added <b>" + name + "<b>");
   		}
   	});
   }
@@ -226,20 +219,24 @@ function saveProject(){
 				projectName = $("#project-dropdown").val();
 				$.post('./', {action:"OPEN_PROJECT", project:projectName}, function(data){
 					if(JSON.parse(JSON.parse(data)['OPEN_PROJECT']) == true){
-						
+						myData['projects'][projectName]['status'] = 'open';
 					}
 				});
 				break;
 			case 'close':
 				projectName = $("#project-dropdown").val();
 				$.post('./', {action:"CLOSE_PROJECT", project:projectName}, function(data){
-					//verify action
+					if(JSON.parse(JSON.parse(data)['CLOSE_PROJECT']) == true){
+						myData['projects'][projectName]['status'] = 'closed';
+					}
 				});
 				break;
 			case 'delete':
-				saveprojectName = $("#project-dropdown").val();
-				$.post('./', {action:"DELETE_PROJECT", project:projectName}, function(data){
-					//verify action
+				projectName = $("#project-dropdown").val();
+				$.post('./', {action:"DESTROY_PROJECT", project:projectName}, function(data){
+					if(JSON.parse(data)['DELETE_PROJECT'] == true){
+						console.log("success");
+					}
 				});
 			default:
 				break;
@@ -248,7 +245,9 @@ function saveProject(){
 
 function deleteUser(e){
 	if($("#user-select").val() != ''){
-		$.post('./', {action:"DESTROY_STUDENT", username:$("#new-linux").val()}, function(data){
+		var username = $("#new-linux").val();
+		var realName = $("#new-name").val();
+		$.post('./', {action:"DESTROY_STUDENT", username:username}, function(data){
 			if(JSON.parse(JSON.parse(data)['DESTROY_STUDENT']) == true){
 				$("#new-linux").val('');
 				$("#new-name").val('');
@@ -256,34 +255,20 @@ function deleteUser(e){
 				option.remove();
 				initSelect2("#user-select");
 				$("#update-admin-checkbox").prop("checked", false);
-				displayNotification();
+				displayNotification("user-mod-notify", "Succesfully deleted <b>" + realName + "</b>");
 			}
 		});
 	}
 	
 }
 
-function displayNotification() {
-	$("#user-updated").removeClass("hide");
-	  $("#user-updated>#update-msg").html(
-	    "<strong>Success!</strong> " +
-	    name + " was successfully updated in the system."
-	    );
-	  	setTimeout(function(){
-	  		$("#user-updated").addClass("hide");
-	  	}, 2000);
-}
-
 function displayNotification(insertLocationID, message) {
-  var alert = '<div id="alert-box" class="alert alert-success hide">'+
-              '<a href="#" class="close" data-dismiss="alert" aria-label="close"></a>'+
-              '<div id="update-msg"></div>'+
-              '</div>';
+  var alert = '<div class="alert alert-success" role="alert">' + message + '</div>'
 
-  $("#"+insertLocationID).append("<strong>Success!</strong> " +message);
+  $("#"+insertLocationID).append(alert);
 
   setTimeout(function(){
-    $("#user-updated").addClass("hide");
+    $("#" + insertLocationID).empty();
   }, 2000);
 }
 
@@ -304,7 +289,6 @@ function updateUser(e){
 		var admin = $("#update-admin-checkbox").prop("checked");
 		var primarykey = myData['students'][$("#user-select").val()]['username'];
 		$.post('./', {action:"UPDATE_STUDENT", username:username, realName:realName, admin:admin, primarykey:primarykey}, function(data){
-			console.log(data, $.parseJSON("true"));
 			if(JSON.parse(JSON.parse(data)['UPDATE_STUDENT']) == true){
 				var studentIdx = $("#user-select").val();
 				var student = myData['students'][studentIdx];
@@ -316,7 +300,7 @@ function updateUser(e){
 				newName.val(realName);
 				$("#user-select option:selected").text(realName);
 				initSelect2("#user-select");
-				displayNotification();
+				displayNotification("user-mod-notify", "Succesfully updated <b>" + realName + "</b>");
 			}
 		});
 	}
