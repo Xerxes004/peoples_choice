@@ -19,7 +19,7 @@
 					session_start();
 					$_SESSION['logged-in'] = true;
 					$_SESSION['username'] = $row['realName'];
-					$_SESSION['linux-name'] = $username;
+					$_SESSION['linux-name'] = $user;
 					$_SESSION['isAdmin'] = $row['isAdmin'] == 'false' ? false:true;
 					$loginStatus = array('login'=>true, 'user'=>$row['realName'], 'isAdmin'=>$_SESSION['isAdmin']);
 				}

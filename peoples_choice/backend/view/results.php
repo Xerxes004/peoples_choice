@@ -3,13 +3,19 @@
 <div class="ct-chart well"></div>
 
 <script>
-	var votesObject = null;
-
+  var voterName = <?php echo '"'.$_SESSION['linux-name'].'"' ?>;
+  var votesObject = {};
+  
 	function castBallot() {
-		votesObject.first = $("#first-pick").find('.team').attr('id');
-		votesObject.second = $("#second-pick").find('.team').attr('id');
-		votesObject.third = $("#third-pick").find('.team').attr('id');
-		votesObject.voter = "<?php echo $_SESSION['linux-name'] ?>";
+		votesObject['first'] = $("#first-pick .team").attr('id');
+		votesObject['second'] = $("#second-pick .team").attr('id');
+		votesObject['third'] = $("#third-pick .team").attr('id');
+		votesObject['voter'] = voterName;
+
+		console.log("First: "+votesObject['first']);
+		console.log("Secon: "+votesObject['second']);
+		console.log("Third: "+votesObject['third']);
+		console.log("Voter: "+votesObject['voter']);
 	}
 
 	$(document).ready(function () {
