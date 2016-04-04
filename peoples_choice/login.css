@@ -22,9 +22,9 @@
 }
 
 .loginmodal-container input[type=text], input[type=password]{
-  height: 28px;
-  line-height: 28px;
-  font-size: 1em;
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
   width: 100%;
   margin-top: 10px; 
   margin-bottom: 10px;
@@ -88,4 +88,18 @@
 
 .login-help{
   font-size: 12px;
+}
+
+.select2-container--default .select2-selection--single{
+  height: 44px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+  height: 44px;
+  line-height: 44px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+  font-size: 16px;
+  line-height: 44px;
 }
