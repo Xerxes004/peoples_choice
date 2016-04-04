@@ -42,11 +42,18 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">Teams</div>
-			<div class="panel-body droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<div id="teamID1" class="team draggable" draggable="true" ondragstart="drag(event)"><b>Wesley Kelly,<br />Joel Sabol</b></div>
-				<div id="teamID2" class="team draggable" draggable="true" ondragstart="drag(event)"><b>Dr. Gallagher,<br />Dr. Shomper</b></div>
-				<div id="teamID3" class="team draggable" draggable="true" ondragstart="drag(event)"><b>Ernie,<br />Bert</b></div>
-				<div id="teamID4" class="team draggable" draggable="true" ondragstart="drag(event)"><b>Hi Mom</b></div>
+			<div class="panel-body">
+				<div class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+					<div id="teamID1" class="team draggable" draggable="true" ondragstart="drag(event)"><b>Wesley Kelly,<br />Joel Sabol</b></div>
+					<div id="teamID2" class="team draggable" draggable="true" ondragstart="drag(event)"><b>Dr. Gallagher,<br />Dr. Shomper</b></div>
+					<div id="teamID3" class="team draggable" draggable="true" ondragstart="drag(event)"><b>Ernie,<br />Bert</b></div>
+					<div id="teamID4" class="team draggable" draggable="true" ondragstart="drag(event)"><b>Hi Mom</b></div>
+				</div>
+				<div class="form-group">
+				  <label for="write-in">Write In Vote:</label>
+				  <input type="text" class="form-control" id="write-in">
+				</div>
+				<button>Add Write-in</button>
 			</div>
 		</div>
 
