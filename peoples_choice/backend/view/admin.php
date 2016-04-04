@@ -63,24 +63,35 @@
 				</div>
 
 			<div id="project-admin" class="tab-pane fade in panel panel-default">
-				<h2>Project Administration</h2>
-				<div class="panel panel-default">
-					<div class="form-group">
-					  <label for="project-dropdown">Select Project:</label>
-					  <select class="form-control" id="project-dropdown">
-					    <option></option>
-					    <?php 
-					    	foreach ($data['projects'] as $project) {
-					    		$name = $project->name;
-					    		echo "<option value=$name'>$name<option>";
-					    	}
-					    ?>
-					  </select>
-					  <div class="well radio">
-						<label class="radio-inline"><input type="radio" name="project-open" value="open">Open Project</label>
-						<label class="radio-inline"><input type="radio" name="project-open" value="close">Close Project</label>
-					  </div>
-					  <button onclick="">Save</button>
+				<div class="row panel-body">
+					<div class="col-sm-6">
+						<h2>Project Administration</h2>
+						<div class="form-group">
+						  <label for="project-dropdown">Select Project:</label>
+						  <select class="form-control" id="project-dropdown">
+						    <option></option>
+						    <?php 
+						    	foreach ($data['projects'] as $project) {
+						    		$name = $project->name;
+						    		echo "<option value=$name'>$name<option>";
+						    	}
+						    ?>
+						  </select>
+						  <div class="well radio">
+							<label class="radio-inline"><input type="radio" name="project-open" value="open">Open Project</label>
+							<label class="radio-inline"><input type="radio" name="project-open" value="close" checked="checked">Close Project</label>
+						  	<label class="radio-inline"><input type="radio" name="project-open" value="delete" checked="checked">Delete Project</label>
+						  </div>
+						  <button onclick="">Save</button>
+						</div>	
+					</div>
+					<div class="col-sm-6">
+						<h2>Project Add/Delete</h2>
+		                <div class="form-group">
+						  <label for="usr">Project Name:</label>
+						  <input type="text" class="form-control" id="add-project">
+						</div>
+						<button onclick="">Add</button>
 					</div>
 				</div>
 			</div>
