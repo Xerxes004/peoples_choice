@@ -3,6 +3,15 @@
 <div class="ct-chart well"></div>
 
 <script>
+	var votesObject = null;
+
+	function castBallot() {
+		votesObject.first = $("#first-pick").find('.team').attr('id');
+		votesObject.second = $("#second-pick").find('.team').attr('id');
+		votesObject.third = $("#third-pick").find('.team').attr('id');
+		votesObject.voter = "<?php echo $_SESSION['linux-name'] ?>";
+	}
+
 	$(document).ready(function () {
 		var bar = new Chartist.Bar('.ct-chart', <?php echo $data['json']; ?>);
 		bar.update();
@@ -15,7 +24,7 @@
 	<div class="panel-body">
 		
 		<div class="row voting-panel">
-			<div class="col-sm-4">
+			<div id="first-pick" class="col-sm-4">
 				<div class="panel">
 					<div class="panel-heading first"><b>First</b></div>
 					<div class="panel-body droppable vote-area" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -23,7 +32,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-4">
+			<div id="second-pick" class="col-sm-4">
 				<div class="panel">
 					<div class="panel-heading second"><b>Second</b></div>
 					<div class="panel-body droppable vote-area" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -31,7 +40,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-4">
+			<div id="third-pick" class="col-sm-4">
 				<div class="panel">
 					<div class="panel-heading third"><b>Third</b></div>
 					<div class="panel-body droppable vote-area" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -57,6 +66,6 @@
 			</div>
 		</div>
 
-		<button>Cast Ballot</button>
+		<button onclick="castBallot()">Cast Ballot</button>
 	</div>
 </div>
