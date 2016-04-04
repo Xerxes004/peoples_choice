@@ -1,7 +1,32 @@
 .team {
-	border: 1px solid lightgrey;
-	display: inline-block;
 	padding: 5px 10px;
+	margin: 5px;
 	border-radius: 5px;
 	background: lightgrey;
+	color: #5a5a5a;
+	display: inline-table;
+}
+
+.panel-default .first {
+	background-color: #f2c414;
+}
+
+.panel-default .second {
+	background-color: #c0c0c0;
+}
+
+.panel-default .third {
+	background-color: #d7995b;
+}
+
+.first, .second, .third {
+	text-align: center;
+}
+
+.voting-panel .panel {
+	border: 1px solid #ebf3fa;
+}
+
+.voting-panel .team {
+	display: block;
 }
