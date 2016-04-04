@@ -100,6 +100,24 @@ $(document).ready(function(){
   });
 });
 
+function addOneStudentPerTeam() {
+  //$("#team-select")
+}
+
+function makeTeamDiv(teamName) {
+  var numTeams = $("#team-area").data("numteams");
+  var str = "<div class='panel panel-default' id='"+teamName+"'>"+
+            "<div class='panel-heading'>"+
+            "<b>Team "+numTeams+"</b>"+
+            "</div>"+
+            "<div class='panel-body droppable' ondrop='drop(event)' ondragover='allowDrop(event)'>"+
+            "</div>"+
+            "</div>";
+  $("#team-area").append(str);
+
+  $("#team-area").data("numteams", numTeams + 1);
+}
+
 
 function addUser(e) {
   e.preventDefault();
