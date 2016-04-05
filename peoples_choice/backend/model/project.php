@@ -9,7 +9,7 @@
 		{
 			$this->beginTransaction();
 
-			$result = $this->queryInTransaction("select * from project");
+			$result = $this->queryInTransaction("select * from wkjs_project");
 
 			$projects = [];
 			while ($row = mysqli_fetch_assoc($result)) {

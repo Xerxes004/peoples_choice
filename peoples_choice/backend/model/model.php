@@ -31,6 +31,7 @@ abstract class Model
 	{
 		$result = mysqli_query($this->conn, $query);
 		$this->trnsFlag = $this->trnsFlag && $result;
+		//echo($query.' '. ($result?'true':'false'));
 		return $result;
 	}
 }

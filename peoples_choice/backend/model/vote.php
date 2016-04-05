@@ -24,22 +24,22 @@
 				$teamid = $team->id;
 				$q = "select * from
 					(select count(value) third
-					from vote
+					from wkjs_vote
 					where projectName='$project'
 					and implementationID=$teamid
 					and value=1) t1,
 					(select count(value) second
-					from vote
+					from wkjs_vote
 					where projectName='$project'
 					and implementationID=$teamid
 					and value=2)t2,
 					(select count(value) first
-					from vote
+					from wkjs_vote
 					where projectName='$project'
 					and implementationID=$teamid
 					and value=3)t3,
 					(select coalesce(sum(value),0) total
-					from vote
+					from wkjs_vote
 					where projectName='$project'
 					and implementationID=$teamid)t4";
 					$voteResult = $this->queryInTransaction($q);

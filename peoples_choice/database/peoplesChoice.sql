@@ -14,7 +14,7 @@ create table wkjs_student(
 	pwHash varchar(64) not null
 );
 
-create table wkjs_dmin(
+create table wkjs_admin(
 	username varchar(32) primary key,
 	foreign key (username) references wkjs_student(username)
 );

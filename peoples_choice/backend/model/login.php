@@ -9,7 +9,7 @@
 			$user = $_POST['username'];
 			$password = $_POST['password'];
 
-			$result = mysqli_query($this->connection, "select s.username, realName, pwHash, coalesce(a.username, 'false') isAdmin from student s left join admin a on s.username=a.username where s.username='$user'");
+			$result = mysqli_query($this->connection, "select s.username, realName, pwHash, coalesce(a.username, 'false') isAdmin from wkjs_student s left join wkjs_admin a on s.username=a.username where s.username='$user'");
 
 			$loginStatus = array('login' => false);
 

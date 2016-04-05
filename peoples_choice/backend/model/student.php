@@ -8,7 +8,7 @@
 		{
 			$this->beginTransaction();
 
-			$result = $this->queryInTransaction("select * from student where username='$username'");
+			$result = $this->queryInTransaction("select * from wkjs_student where username='$username'");
 
 			$row = mysqli_fetch_assoc($result);
 			$student = new Student($row['username'], $row['realName'], $row['pwHash']);
@@ -20,9 +20,10 @@
 
 		public function getStudents(){
 			$this->beginTransaction();
+			$q = "select s.username, realName, pwHash, coalesce(a.username, 'false') isAdmin
+			 from wkjs_student s left join wkjs_admin a on s.username=a.username order by realName asc";
 
-			$result = $this->queryInTransaction("select s.username, realName, pwHash, coalesce(a.username, 'false') isAdmin
-			 from student s left join admin a on s.username=a.username order by realName asc");
+			$result = $this->queryInTransaction($q);
 
 			$students = [];
 			while ($row = mysqli_fetch_assoc($result)) {

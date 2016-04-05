@@ -55,16 +55,7 @@
 		}
 	}
 
-	$(document).ready(function(){
-		setInterval(function(){
-			$.get('./', {action:"data", data:"GET_VOTES", project:CURRENT_PROJECT}, function(data){
-					var results = JSON.parse(data);
-					$("#new-char").series[0].setData(results[0]);
-					$("#new-char").series[1].setData(results[1]);
-					$("#new-char").series[2].setData(results[2]);
-			});
-		}, 5000);
-	})
+	$(document).ready()
 
 	$(function () {
     $('#new-char').highcharts({

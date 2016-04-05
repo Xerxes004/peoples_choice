@@ -222,7 +222,7 @@ function addUser(e) {
   	$.post("./", {action:"CREATE_STUDENT", username:linux_user, realName:name, pwHash:pwHash, admin:admin}, function(data){
   		// If the request was successful update the page
   		if(JSON.parse(JSON.parse(data)['CREATE_STUDENT']) == true){
-  			myData['students'].push({isAdmin:admin, pwHash:pwHash, realName:name, username:linux_user});
+  			myData['students']['name'] = {isAdmin:admin, pwHash:pwHash, realName:name, username:linux_user};
   			// Insert the new user into the selector
   			$("#user-select").append('<option value="' + (myData['students'].length-1) + '">' + name + '</option>');
   			// Update the select2 selector

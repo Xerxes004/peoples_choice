@@ -14,7 +14,8 @@ class Controller
 {
 	public function renderPage()
 	{
-		$_SESSION['db'] = mysqli_connect("163.11.162.204", 'joel', 'password', 'app') or die("DB Connection Error");
+		$_SESSION['db'] = mysqli_connect("james.cedarville.edu", 'cs4220', '', 'cs4220') or die("DB Connection Error");
+
 		$complete = true;
 		switch($_SERVER['REQUEST_METHOD'])
 		{

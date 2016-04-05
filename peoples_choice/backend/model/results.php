@@ -57,8 +57,25 @@ class ResultsPage extends Model
 		$myfirst = '['.implode(',', $first).']';
 		$mysecond = '['.implode(',',$second).']';
 		$mythird = '['.implode(',',$third).']';
-		$chartData = "chart: {
-            type: 'bar'
+
+		$chartData = "
+        chart : {
+            type: 'bar',
+            animation: false,
+            events : {
+                load : function(){
+                    var s1 = this.series[0];
+                    var s2 = this.series[1];
+                    var s3 = this.series[2];
+                setInterval(function(){
+                    $.get('./', {action:'data', data:'GET_VOTES', project:'$proj'}, function(data){
+                            var results = JSON.parse(data);
+                            s3.setData(results[0], true);
+                            s2.setData(results[1], true);
+                            s1.setData(results[2], true);
+                    });
+                }, 3000);}
+            }
         },
         title: {
             text: 'Peoples Choice Results'
