@@ -1,10 +1,5 @@
-footer {
-	position: static;
-	bottom: 0;
-}
-
 .ct-label {
-	font-size: 12pt;
+	font-size: 10pt;
 }
 
 .ct-chart {
@@ -13,7 +8,6 @@ footer {
 
 .ct-series-a .ct-bar {
 	stroke: #cd7f32;
-
 }
 
 .ct-series-a line {

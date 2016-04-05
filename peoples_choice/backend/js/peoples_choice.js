@@ -115,6 +115,13 @@ $(document).ready(function(){
     placeholder: "Select Project",
     allowClear: true
   });
+
+
+  $("#team-select").select2({
+    width:"100%",
+    placeholder: "Select User",
+    allowClear: true
+  });
   
   $(".draggable").on('touchmove', function(e) {
     var touches = e.originalEvent.changedTouches[0];
@@ -208,7 +215,7 @@ function addUser(e) {
   			$("#add-linux").val('');
   			$("#add-user").val('');
 
-  			displayNotification("add-user-notify", "Successfully added <b>" + name + "<b>");
+  			displayNotification("add-user-notify", "Successfully added <b>" + name + "<b>", "success");
   		}
   	});
   }
@@ -250,15 +257,15 @@ function deleteUser(e){
 				option.remove();
 				initSelect2("#user-select");
 				$("#update-admin-checkbox").prop("checked", false);
-				displayNotification("user-mod-notify", "Succesfully deleted <b>" + realName + "</b>");
+				displayNotification("user-mod-notify", "Succesfully deleted <b>" + realName + "</b>", "success");
 			}
 		});
 	}
 	
 }
 
-function displayNotification(insertLocationID, message) {
-  var alert = '<div class="alert alert-success" role="alert">' + message + '</div>'
+function displayNotification(insertLocationID, message, type) {
+  var alert = '<div class="alert alert-'+type+'" role="alert">' + message + '</div>'
 
   $("#"+insertLocationID).append(alert);
 
@@ -295,7 +302,7 @@ function updateUser(e){
 				newName.val(realName);
 				$("#user-select option:selected").text(realName);
 				initSelect2("#user-select");
-				displayNotification("user-mod-notify", "Succesfully updated <b>" + realName + "</b>");
+				displayNotification("user-mod-notify", "Succesfully updated <b>" + realName + "</b>", "success");
 			}
 		});
 	}
