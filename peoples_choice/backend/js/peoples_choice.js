@@ -130,6 +130,17 @@ $(document).ready(function(){
     $(e.currentTarget).css('top', touches.pageY - 25 + 'px');
     e.preventDefault();
   });
+
+  $("#team-project-dropdown").change( function () {
+    var teamdivID = makeTeamDiv();
+    var projectName = $(this).val();
+    var teams = myData.teams[projectName];
+    for (var i = 0; i < teams.length; i++) {
+      for (var j = 0; j < teams[i].length; j++) {
+        $("#"+teamdivID).append("<div ondragstart='drag(event)' draggable='true' class='student draggable' id='$linux_user'><b>"+teams[i][j]+"</b></div>");
+      }
+    }
+  });
 });
 
 

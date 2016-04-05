@@ -128,7 +128,6 @@
 				        <button onclick="saveTeams()">Save Teams</button>
 				        <button onclick="clearTeams()">Clear</button>
 						<div id="team-area" data-numteams="0">
-							
 				    </div>
 					</div>
 				</div>
