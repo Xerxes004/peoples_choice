@@ -64,6 +64,15 @@ class Controller
 							$success = $am->createTeam($members);
 							break;
 						case 'DESTROY_TEAM':
+							break;
+
+						case 'VOTE':
+							$vote = json_decode($_POST['vote']);
+							$success = $am->castBallot($vote);
+							echo(json_encode(array("VOTE"=>$success)));
+							print_r($vote);
+							break;
+
 						default:
 							$complete = false;
 						break;

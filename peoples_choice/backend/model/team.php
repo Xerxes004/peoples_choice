@@ -19,7 +19,6 @@
 				$query .= "('$member', '$project', $miplid),";
 			}
 			$query = rtrim($query, ",");
-			echo($query);
 			$this->queryInTransaction($query);
 
 			# End the transaction
