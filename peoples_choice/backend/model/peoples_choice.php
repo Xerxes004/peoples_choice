@@ -33,52 +33,54 @@
 					// then associate project with votes with user
 					foreach ($team->members as $student) {
 						
-						if ($votesForTeam->total > $first_place_votes) {
+						if ($votesForTeam->total != 0) {
+							if ($votesForTeam->total > $first_place_votes) {
 
-							$third_place_votes = $second_place_votes;
-							$third_place_users = $second_place_users;
+								$third_place_votes = $second_place_votes;
+								$third_place_users = $second_place_users;
 
-							$second_place_votes = $first_place_votes;
-							$second_place_users = $first_place_users;
+								$second_place_votes = $first_place_votes;
+								$second_place_users = $first_place_users;
 
-							$first_place_votes = $votesForTeam->total;
-							$first_place_users = array();
+								$first_place_votes = $votesForTeam->total;
+								$first_place_users = array();
 
-							array_push($first_place_users, $student);
+								array_push($first_place_users, $student);
 
-						} else if ($votesForTeam->total == $first_place_votes) {
+							} else if ($votesForTeam->total == $first_place_votes) {
 
-							array_push($first_place_users, $student);
+								array_push($first_place_users, $student);
 
-						} else if ($votesForTeam->total > $second_place_votes) {
+							} else if ($votesForTeam->total > $second_place_votes) {
 
-							$third_place_votes = $second_place_votes;
-							$third_place_users = $second_place_users;
+								$third_place_votes = $second_place_votes;
+								$third_place_users = $second_place_users;
 
-							$second_place_votes = $votesForTeam->total;
-							$second_place_users = array();
+								$second_place_votes = $votesForTeam->total;
+								$second_place_users = array();
 
-							array_push($second_place_users, $student);
+								array_push($second_place_users, $student);
 
-						} else if ($votesForTeam->total == $second_place_votes) {
+							} else if ($votesForTeam->total == $second_place_votes) {
 
-							array_push($second_place_users, $student);
+								array_push($second_place_users, $student);
 
-						} else if ($votesForTeam->total > $third_place_votes) {
+							} else if ($votesForTeam->total > $third_place_votes) {
 
-							$third_place_votes = $votesForTeam->total;
-							$third_place_users = array();
+								$third_place_votes = $votesForTeam->total;
+								$third_place_users = array();
 
-							array_push($third_place_users, $student);
+								array_push($third_place_users, $student);
 
-						} else if ($votesForTeam->total == $third_place_votes) {
+							} else if ($votesForTeam->total == $third_place_votes) {
 
-							array_push($third_place_users, $student);
+								array_push($third_place_users, $student);
 
+							}
 						}
 					}
 				}
-				
+
 				$grades[$project->name]['first'] = $first_place_users;
 				$grades[$project->name]['second'] = $second_place_users;
 				$grades[$project->name]['third'] = $third_place_users;
