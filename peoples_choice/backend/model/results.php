@@ -40,8 +40,7 @@ class ResultsPage extends Model
 			  		onlyInteger: true
 			  	},
 			  	axisY: {
-			  		offset: 150,
-			  		onlyInteger: true
+			  		offset: 150
 			  	},
 			}).on('draw', function(data) {
 			  	if(data.type === 'bar') {

@@ -114,6 +114,13 @@ $(document).ready(function(){
     placeholder: "Select User",
     allowClear: true
   });
+
+
+  $("#team-select").select2({
+    width:"100%",
+    placeholder: "Select User",
+    allowClear: true
+  });
   
   $(".draggable").on('touchmove', function(e) {
     var touches = e.originalEvent.changedTouches[0];

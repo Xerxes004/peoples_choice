@@ -7,11 +7,17 @@
   var votesObject = {};
 
   	function addWriteIn() {
-  		'<div class="panel panel-default">'+
-  			'<div class="panel-body">'+
-
-  			'</div>'+
-  		'</div>';
+  		if ($("#team-select").val() !== '' && $("#write-in-box").val() !== '') {
+	  		$("#write-in-area").append('<div class="panel panel-default">'+
+	  			'<div class="panel-body">'+
+	  			'<h3>'+$("#team-select").val()+'</h3>'+
+	  			'<hr />'+
+	  			$("#write-in-box").val()+
+	  			'</div>'+
+	  		'</div>');
+	  	} else {
+	  		
+	  	}
   	}
   
 	function castBallot() {
@@ -90,24 +96,34 @@
 			<div class="form-group">
 			  <h3>Write In Vote</h3>
 			  <div class="form-group">
-			    <label for="user-select">Select User:</label>
-			    <select class="form-control" id="user-select">
+			    <label for="team-select">Select User:</label>
+			    <select class="form-control" id="team-select">
 			  	  <option></option>
-			      <?php 
-			    	foreach ($data['students'] as $key => $student) {
-			    		$realName = $student->realName;	
-			    		echo "<option value='$key'>$realName<option>";
-			    	}
-			       ?>
+			      <?php
+							$teams = $data['teams'];
+							foreach ($teams as $team)
+							{
+								if (!in_array($_SESSION['username'], $team->members)) {
+									echo '<option>';
+									foreach ($team->members as $member)
+									{
+										echo $member.'<br />';
+									}
+									echo '</option>';
+								}
+							}
+						?>
 			    </select>
 			  </div>
 			  <label for="write-in">Write In:</label>
 			  <input type="text" name="write-in" class="form-control" id="write-in-box">
 			</div>
 
+			<button onclick="addWriteIn()">Add Write-in</button>
+			<hr />
+
 			<div id="write-in-area">
 			</div>
-			<button onclick="addWriteIn()">Add Write-in</button>
 		</div>
 	</div>
 	<div id="invalid-vote"></div>
