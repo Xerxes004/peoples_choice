@@ -9,12 +9,93 @@
 			$p = new ProjectModel();
 			$projects = $p->getProjects();
 
-			// for every project, get a number of votes for every team
-			// for every team, get a number of votes for every user
-			// then associate project with votes with user
-			// whichever user has the most votes for a project wins, etc.
+			$v = new VoteModel();
+			$t = new TeamModel();
+			$studentVotes = [];
+			$grades = array();
 
-			return array("students" => $students, "projects"=>$projects);
+			// for every project, get a number of votes for every team
+			foreach ($projects as $project) {
+				$first_place_votes = 0;
+				$first_place_users = array();
+				$second_place_votes = 0;
+				$second_place_users = array();
+				$third_place_votes = 0;
+				$third_place_users = array();
+
+				$votesForProject = $v->getAllVotesForProject($project->name);
+				$teams = $t->getTeamsForProject($project->name);
+				// for every team, get a number of votes for every user
+				#echo $project->name."<hr />";
+				foreach ($teams as $team) {
+					$votesForTeam = $votesForProject[$team->id];
+					#echo $t->printTeamMembers($team->members);
+					#echo "Total votes $votesForTeam->total<br />";
+
+					// then associate project with votes with user
+					foreach ($team->members as $student) {
+						#$studentVotes[$project->name][$student] = $votesForTeam->total;
+
+						if ($votesForTeam->total > $first_place_votes) {
+
+							$third_place_votes = $second_place_votes;
+							$third_place_users = $second_place_users;
+
+							$second_place_votes = $first_place_votes;
+							$second_place_users = $first_place_users;
+
+							$first_place_votes = $votesForTeam->total;
+							$first_place_users = array();
+
+							array_push($first_place_users, $student);
+
+						} else if ($votesForTeam->total == $first_place_votes) {
+
+							array_push($first_place_users, $student);
+
+						} else if ($votesForTeam->total > $second_place_votes) {
+
+							$third_place_votes = $second_place_votes;
+							$third_place_users = $second_place_users;
+
+							$second_place_votes = $votesForTeam->total;
+							$second_place_users = array();
+
+							array_push($second_place_users, $student);
+
+						} else if ($votesForTeam->total == $second_place_votes) {
+
+							array_push($second_place_users, $student);
+
+						} else if ($votesForTeam->total > $third_place_votes) {
+
+							$third_place_votes = $votesForTeam->total;
+							$third_place_users = array();
+
+							array_push($third_place_users, $student);
+
+						} else if ($votesForTeam->total == $third_place_votes) {
+
+							array_push($third_place_users, $student);
+
+						}
+					}
+				}
+				echo "<br /><br />Project: ".$project->name."";
+				$grades[$project->name]['first'] = $first_place_users;
+				echo '<br />first : ';
+				print_r($first_place_users);
+				$grades[$project->name]['second'] = $second_place_users;
+				echo '<br />second : ';
+				print_r($second_place_users);
+				$grades[$project->name]['third'] = $third_place_users;
+				echo '<br />third : ';
+				print_r($third_place_users);
+			}
+
+			// whichever user has the most votes for a project wins, etc.
+			
+			return array("students" => $students, "projects"=>$projects, "grades"=>$grades);
 		}
 		
 	}

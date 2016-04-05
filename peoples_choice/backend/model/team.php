@@ -59,6 +59,12 @@
 
 			return $teams;
 		}
+
+		public function printTeamMembers($names) {
+			foreach ($names as $name) {
+				echo "\"$name\"";
+			}
+		}
 	}
 
 	/**
