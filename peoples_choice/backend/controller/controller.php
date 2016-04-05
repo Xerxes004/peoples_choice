@@ -99,7 +99,6 @@ class Controller
 							print_r($vote);
 							break;
 						
-						
 						default:
 							echo(json_encode(array($_POST['action']=>false)));
 							break;
@@ -115,10 +114,14 @@ class Controller
 								$rm = new ResultsPage();
 								echo json_encode($rm->getVoteData($_GET['project']));
 							break;
-							
-							default:
-								# code...
+							case 'GET_WRITE_IN':
+								$rm = new ResultsPage();
+								echo json_encode($rm->getWriteIn($_GET['project']));
 								break;
+								
+								default:
+									# code...
+									break;
 						}
 						# code...
 						break;

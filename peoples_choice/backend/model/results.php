@@ -22,9 +22,22 @@ class ResultsPage extends Model
         return array($first, $second, $third);
     }
 
+    public function getWriteIn($proj)
+    {
+        $this->beginTransaction();
+        $results = $this->queryInTransaction("select * from wkjs_writeIn where projectName='$proj'");
+        $writeIns = [];
+        while($row = mysqli_fetch_assoc($results)) {
+            array_push($writeIns, array($row['teamMembers'], $row['comment']));
+        }
+        $this->endTransaction();
+        return $writeIns;
+    }
+
     public function studentHasVoted($username, $project){
         $this->beginTransaction();
         $result = mysqli_fetch_assoc($this->queryInTransaction("select count(*) cast from wkjs_vote where projectName='$project' and username='$username'"));
+        $this->endTransaction();
         return $result['cast'] > 0;
     }
 

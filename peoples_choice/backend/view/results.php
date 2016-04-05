@@ -70,7 +70,27 @@
 		}
 	}
 
-	$(document).ready()
+	$(document).ready(function(){
+		setInterval(function(){
+			$.get('./', {action:"data", data:"GET_WRITE_IN", project:CURRENT_PROJECT}, function(data){
+				var writeins = JSON.parse(data);
+				$("#display-write-ins").empty();
+
+				for(var i = 0; i < writeins.length; i++){
+					var str = "<div class='panel panel-default'>"+
+				"<div class='panel-body'>"+
+				"<b>"+writeins[i][0]+"</b>"+
+				"<hr />"+
+				writeins[i][1]+
+				"</div>"+
+				"</div>";
+			$("#display-write-ins").append(str);
+				}
+
+				console.log(writeins);
+			})
+		}, 3000);
+	});
 
 	$(function () {
     $('#new-char').highcharts({
