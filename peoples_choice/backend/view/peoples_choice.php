@@ -6,6 +6,7 @@
           <?php 
             echo "<th></th>";
             $projs = $data['projects'];
+            //print_r($projs);
             foreach ($projs as $proj) {
               echo "<th><a href='?proj=$proj->name&page=project_results'>$proj->name</a></th>";
             }

@@ -101,7 +101,6 @@
 
 		public function clearTeamsForProject($project)
 		{
-			echo($project);
 			$this->beginTransaction();
 			$this->queryInTransaction('set foreign_key_checks=0');
 			$this->queryInTransaction("delete from wkjs_implementation where implementationID in (select implementationID from wkjs_team where projectName='$project')");

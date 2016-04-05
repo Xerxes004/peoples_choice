@@ -66,7 +66,7 @@
 
 <!-- vote section -->
 
-<div class="<?php echo ($_SESSION['logged-in'] ? '' : 'hidden'); ?>">
+<div class="<?php echo ($_SESSION['logged-in'] && !$_GET['voted'] ? '' : 'hidden'); ?>">
 	<div class="row voting-panel">
 		<div id="first-pick" class="col-sm-4">
 			<div class="panel">

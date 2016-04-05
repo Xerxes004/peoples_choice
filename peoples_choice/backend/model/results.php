@@ -22,6 +22,12 @@ class ResultsPage extends Model
         return array($first, $second, $third);
     }
 
+    public function studentHasVoted($username, $project){
+        $this->beginTransaction();
+        $result = mysqli_fetch_assoc($this->queryInTransaction("select count(*) cast from wkjs_vote where projectName='$project' and username='$username'"));
+        return $result['cast'] > 0;
+    }
+
     public function getResultsData($proj)
 	{
 		$vm = new VoteModel();

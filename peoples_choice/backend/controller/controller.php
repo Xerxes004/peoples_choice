@@ -40,7 +40,7 @@ class Controller
 							echo(json_encode(array("RESET_PASSWORD"=>$success)));
 							break;
 						case 'CREATE_PROJECT':
-							$success = $am->createProject($_POST['project'], 'closed');
+							$success = $am->createProject($_POST['project'], 'pending');
 							echo(json_encode(array("CREATE_PROJECT"=>$success)));
 							break;
 						case 'OPEN_PROJECT':
@@ -129,6 +129,7 @@ class Controller
 							case 'project_results':
 								$model = new ResultsPage();
 								$data = $model->getResultsData($_GET['proj']);
+								$_GET['voted'] = $model->studentHasVoted($_SESSION['linux-name'], $_GET['proj']);
 								$page = new View('results.php');
 								$page->display($data);
 								break;
