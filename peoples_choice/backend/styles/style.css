@@ -26,9 +26,13 @@ body {
 	text-align: center;
 }
 
+#results-table td {
+	border: 1px solid lightgrey;
+}
+
 .score {
-	font-size: 20pt;
-    text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+	font-size: 25pt;
+    /*text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;*/
 }
 
 .first-place {

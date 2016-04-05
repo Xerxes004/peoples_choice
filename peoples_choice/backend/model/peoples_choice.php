@@ -78,6 +78,7 @@
 						}
 					}
 				}
+				
 				$grades[$project->name]['first'] = $first_place_users;
 				$grades[$project->name]['second'] = $second_place_users;
 				$grades[$project->name]['third'] = $third_place_users;
