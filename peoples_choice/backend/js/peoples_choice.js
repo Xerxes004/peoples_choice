@@ -89,6 +89,7 @@ $(document).ready(function(){
 		var projIdx = $(this).val();
 		var project = myData['projects'][projIdx];
 		$projectName = $("#project-dropdown").val();
+		console.log(project);
 		switch(project['status']){
 			case 'closed':
 				$("#close-radio").prop("checked", true);
@@ -111,7 +112,7 @@ $(document).ready(function(){
 
   $("#team-project-dropdown").select2({
     width:"100%",
-    placeholder: "Select User",
+    placeholder: "Select Project",
     allowClear: true
   });
   
@@ -231,14 +232,8 @@ function saveProject(){
 					}
 				});
 				break;
-			case 'delete':
-				projectName = $("#project-dropdown").val();
-				$.post('./', {action:"DESTROY_PROJECT", project:projectName}, function(data){
-					if(JSON.parse(data)['DELETE_PROJECT'] == true){
-						console.log("success");
-					}
-				});
 			default:
+
 				break;
 		}
 	}
@@ -312,6 +307,32 @@ function resetPassword(){
 			if(JSON.parse(JSON.parse(data)['RESET_PASSWORD']) == true){
 				
 			}
+		});
+	}
+}
+
+function saveTeams(){
+	getTeams();
+}
+
+function clearTeams(){
+
+}
+
+function getTeams(){
+	var project = $("#team-project-dropdown").val();
+	console.log(project);
+	if(project != ''){
+		$(".team-box").each(function(tbIdx){
+			members = [];
+			$(this).find(".student").each(function(studIdx){
+				members.push($(this).attr('id'));
+			});
+			console.log(JSON.stringify(members));
+			$.post('./', {action:"CREATE_TEAM", team:JSON.stringify({project:project, members:members})}, function(data){
+
+			});
+			members = null;
 		});
 	}
 }

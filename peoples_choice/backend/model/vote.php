@@ -18,10 +18,11 @@
 
 			
 			$q = '';
+			$votes = [];
 			foreach ($teams as $team) {
 				$project = $team->project;
 				$teamid = $team->id;
-				$q .= "select * from
+				$q = "select * from
 					(select count(value) third
 					from vote
 					where projectName='$project'
@@ -40,18 +41,22 @@
 					(select coalesce(sum(value),0) total
 					from vote
 					where projectName='$project'
-					and implementationID=$teamid)t4
-					union ";
+					and implementationID=$teamid)t4";
+					$voteResult = $this->queryInTransaction($q);
+					$vote = mysqli_fetch_assoc($voteResult);
+					$votes[$team->id] = Vote::score($vote['first'], $vote['second'], $vote['third'], $vote['total']);
 			}
 			
-			$q = rtrim($q, 'union ');
+			/*$q = rtrim($q, 'union ');
 
-			$votes = [];
-			$voteResult = $this->queryInTransaction($q);
+			
+			
+			print_r($voteResult);
 			foreach ($teams as $team) {
 				$vote = mysqli_fetch_assoc($voteResult);
+				print_r($vote);
 				$votes[$team->id] = Vote::score($vote['first'], $vote['second'], $vote['third'], $vote['total']);
-			}
+			}*/
 			return $votes;
 		}
 	}

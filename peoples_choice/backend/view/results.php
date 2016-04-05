@@ -2,6 +2,10 @@
 <h1 style="text-align: center">Votes for <?php echo $_GET['proj']; ?></h1>
 <div class="ct-chart well"></div>
 
+
+
+<div id="new-char" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+
 <script>
 	var votesObject = null;
 
@@ -12,10 +16,11 @@
 		votesObject.voter = "<?php echo $_SESSION['linux-name'] ?>";
 	}
 
-	$(document).ready(function () {
-		var bar = new Chartist.Bar('.ct-chart', <?php echo $data['json']; ?>);
-		bar.update();
-	});
+	$(function () {
+    $('#new-char').highcharts({
+        <?php echo $data['highcharts'] ?>
+    });
+});
 </script>
 
 <!-- vote section -->

@@ -48,7 +48,7 @@ class Controller
 							echo(json_encode(array("OPEN_PROJECT"=>$success)));
 							break;
 						case 'CLOSE_PROJECT':
-							$success  = $am->updateProject($POST['project'], 'closed');
+							$success  = $am->updateProject($_POST['project'], 'closed');
 							echo(json_encode(array("CLOSE_PROJECT"=>$success)));
 							break;
 						case 'DESTROY_PROJECT':
@@ -56,6 +56,13 @@ class Controller
 							echo(json_encode(array("DESTROY_PROJECT"=>$success)));
 							break;
 						case 'CREATE_TEAM':
+							echo($_POST['team']);
+							print_r(json_decode($_POST['team']));
+
+							$members = json_decode($_POST['team']);
+							echo($members->project);
+							$success = $am->createTeam($members);
+							break;
 						case 'DESTROY_TEAM':
 						default:
 							$complete = false;

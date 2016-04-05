@@ -1,7 +1,7 @@
 <?php 
 	class TeamModel extends Model{
 
-		public function create($team)
+		public function createTeam($team)
 		{		
 			$this->beginTransaction();
 
@@ -19,7 +19,7 @@
 				$query .= "('$member', '$project', $miplid),";
 			}
 			$query = rtrim($query, ",");
-
+			echo($query);
 			$this->queryInTransaction($query);
 
 			# End the transaction

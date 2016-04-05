@@ -11,6 +11,8 @@ class ResultsPage extends Model
 		$sm = new StudentModel();
 		$students = $sm->getStudents();
 
+		print_r($teams);
+
 		$fi = [];
 		$se = [];
 		$th = [];
@@ -19,7 +21,7 @@ class ResultsPage extends Model
 			$id = $team->id;
 			$tmp = '';
 			foreach ($team->members as $member) {
-				$tmp .= $member . '<br />';
+				$tmp .= $member . ' ';
 			}
 			array_push($na, $tmp);
 			unset($tmp);
@@ -28,32 +30,46 @@ class ResultsPage extends Model
 			array_push($se, $vote->second);
 			array_push($th, $vote->third);
 		}
-		$data['series'] = array($th, $se, $fi);
-		$data['labels'] = $na;
 
-		$jsonData = json_encode($data);
-		$jsonData .= ",{
-				seriesBarDistance: 5,
-			  	stackBars: true,
-			  	horizontalBars: true,
-			  	onlyInteger: true,
-			  	axisY: {
-			  		offset: 150
-			  	},
-			  	axisX: {
-      				labelInterpolationFnc: function (value, index) {
-      					return index % 5 === 0 ? index : null;
-      				}
-    			},
-			}).on('draw', function(data) {
-			  	if(data.type === 'bar') {
-			    	data.element.attr({
-			      		style: 'stroke-width: 20px'
-				    });
-				  }
-			}";
+		$mymembers = json_encode($na);
+		$myfirst = '['.implode(',', $fi).']';
+		$mysecond = '['.implode(',',$se).']';
+		$mythird = '['.implode(',',$th).']';
+		$chartData = "chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Peoples Choice Results'
+        },
+        xAxis: {
+            categories: $mymembers
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Votes'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        series: [{
+            name: 'First',
+            data: $myfirst
+        }, {
+            name: 'Second',
+            data: $mysecond
+        }, {
+            name: 'Third',
+            data: $mythird
+        }]";
 
-		return array('json' => $jsonData, 'students' => $students);
+		return array('json' => $jsonData, 'students' => $students, 'highcharts'=>$chartData);
 	}
 }
 ?>

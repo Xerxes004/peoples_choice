@@ -94,8 +94,9 @@
 
 		public function createTeam($team)	
 		{
-			$this->beginTransaction();
-			$this->queryInTransaction("insert into team values");
+
+			$tm = new TeamModel();
+			$tm->createTeam($team);
 		}
 
 		public function destroyTeam($teamid)

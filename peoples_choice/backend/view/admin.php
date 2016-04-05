@@ -77,10 +77,10 @@
 						  <div class="well radio">
 						  	<div class="row">
 									<div class="col-sm-6">
-										<label class="radio"><input type="radio" name="project-open" value="open">Open Project</label>
+										<label class="radio"><input id="open-radio" type="radio" name="project-open" value="open">Open Project</label>
 									</div>
 									<div class="col-sm-6">
-										<label class="radio"><input type="radio" name="project-open" value="close" checked="checked">Close Project</label>
+										<label class="radio"><input id="close-radio" type="radio" name="project-open" value="close" checked="checked">Close Project</label>
 									</div>
 						    </div>
 						  </div>
@@ -107,7 +107,7 @@
 						    <?php 
 						    	foreach ($data['projects'] as $project) {
 						    		$name = $project->name;
-						    		echo "<option value=$name'>$name<option>";
+						    		echo "<option value='$name'>$name<option>";
 						    	}
 						    ?>
 					    </select>
@@ -134,6 +134,7 @@
 						<h3>Teams</h3>
 				        <button onclick="makeTeamDiv()">Add Team</button>
 				        <button onclick="saveTeams()">Save Teams</button>
+				        <button onclick="clearTeams()">Clear</button>
 						<div id="team-area" data-numteams="0">
 							
 				    </div>
