@@ -8,84 +8,84 @@ drop table project;
 drop table admin;
 drop table student;
 
-create table student(
+create table wkjs_student(
 	username varchar(32) primary key,
 	realName varchar(32) not null,
 	pwHash varchar(64) not null
 );
 
-create table admin(
+create table wkjs_dmin(
 	username varchar(32) primary key,
-	foreign key (username) references student(username)
+	foreign key (username) references wkjs_student(username)
 );
 
 
-create table project(
+create table wkjs_project(
 	name varchar(32) primary key,
 	status varchar(7) check(status in ("open", "closed", "pending"))
 );
 
-create table implementation(
+create table wkjs_implementation(
 	implementationID int primary key
 );
 
-create table team(
+create table wkjs_team(
 	username varchar(32),
 	projectName varchar(32),
 	implementationID int,
 	primary key(username, projectName, implementationID),
-	foreign key (username) references student(username),
-	foreign key (projectName) references project(name),
-	foreign key (implementationID) references implementation(implementationID)
+	foreign key (username) references wkjs_student(username),
+	foreign key (projectName) references wkjs_project(name),
+	foreign key (implementationID) references wkjs_implementation(implementationID)
 );
 
-create table vote(
+create table wkjs_vote(
 	username varchar(32),
 	projectName varchar(32),
 	implementationID int,
 	value numeric(1) check(value > 0 and value <= 3),
 	primary key(username, projectName, implementationID),
-	foreign key (username) references student(username),
-	foreign key (projectName) references project(name),
-	foreign key (implementationID) references implementation(implementationID)
+	foreign key (username) references wkjs_student(username),
+	foreign key (projectName) references wkjs_project(name),
+	foreign key (implementationID) references wkjs_implementation(implementationID)
 );
 
-create table writeIn(
+create table wkjs_writeIn(
 	username varchar(32),
 	projectName varchar(32),
 	implementationID int,
 	comment varchar(250) not null,
 	primary key(username, projectName, implementationID),
-	foreign key (username) references student(username),
-	foreign key (projectName) references project(name),
-	foreign key (implementationID) references implementation(implementationID)
+	foreign key (username) references wkjs_student(username),
+	foreign key (projectName) references wkjs_project(name),
+	foreign key (implementationID) references wkjs_implementation(implementationID)
 );
 
-insert into project values("Project1", "closed");
-insert into project values("Project2", "closed");
-insert into project values("Project3", "closed");
+insert into wkjs_project values("Project1", "closed");
+insert into wkjs_project values("Project2", "closed");
+insert into wkjs_project values("Project3", "closed");
 
-insert into student values("sabol", "Joel Sabol", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-insert into student values("kelly", "Wesley Kelly", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-insert into student values("gallagd", "Dr. Gallagher", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+insert into wkjs_student values("sabol", "Joel Sabol", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+insert into wkjs_student values("kelly", "Wesley Kelly", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+insert into wkjs_student values("gallagd", "Dr. Gallagher", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
 
-insert into implementation values(1);
-insert into implementation values(2);
-insert into implementation values(3);
-insert into implementation values(4);
-insert into implementation values(5);
+insert into wkjs_implementation values(1);
+insert into wkjs_implementation values(2);
+insert into wkjs_implementation values(3);
+insert into wkjs_implementation values(4);
+insert into wkjs_implementation values(5);
 
-insert into team values("sabol", "Project1", 1);
-insert into team values("kelly", "Project1", 2);
-insert into team values("gallagd", "Project1", 3);
-insert into team values("gallagd", "Project2", 4);
-insert into team values("kelly", "Project2", 4);
-insert into team values("kelly", "Project3", 5);
-insert into team values("sabol", "Project3", 5);
+insert into wkjs_team values("sabol", "Project1", 1);
+insert into wkjs_team values("kelly", "Project1", 2);
+insert into wkjs_team values("gallagd", "Project1", 3);
+insert into wkjs_team values("gallagd", "Project2", 4);
+insert into wkjs_team values("kelly", "Project2", 4);
+insert into wkjs_team values("kelly", "Project3", 5);
+insert into wkjs_team values("sabol", "Project3", 5);
 
-insert into vote values("kelly", "Project1", 2, 1);
-insert into vote values("gallagd", "Project1", 3, 2);
-insert into vote values("sabol", "Project1", 3, 2);
+insert into wkjs_vote values("kelly", "Project1", 2, 1);
+insert into wkjs_vote values("gallagd", "Project1", 3, 2);
+insert into wkjs_vote values("sabol", "Project1", 3, 2);
 
 select username, sum(value) score
 from vote

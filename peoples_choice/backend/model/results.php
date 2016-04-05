@@ -2,7 +2,27 @@
 
 class ResultsPage extends Model
 {
-	public function getResultsData($proj)
+	public function getVoteData($proj)
+    {
+        $tm = new TeamModel();
+        $teams = $tm->getTeamsForProject($proj);
+        $vm = new VoteModel();
+        $votes = $vm->getAllVotesForProject($proj);
+
+        $first = [];
+        $second = [];
+        $third = [];
+        foreach ($teams as $team) {
+            $id = $team->id;
+            $vote = $votes[$id];
+            array_push($first, $vote->first*3);
+            array_push($second, $vote->second*2);
+            array_push($third, $vote->third*1);
+        }
+        return array($first, $second, $third);
+    }
+
+    public function getResultsData($proj)
 	{
 		$vm = new VoteModel();
 		$votes = $vm->getAllVotesForProject($proj);

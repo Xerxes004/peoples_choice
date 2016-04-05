@@ -47,16 +47,6 @@
 					$votes[$team->id] = Vote::score($vote['first'], $vote['second'], $vote['third'], $vote['total']);
 			}
 			
-			/*$q = rtrim($q, 'union ');
-
-			
-			
-			print_r($voteResult);
-			foreach ($teams as $team) {
-				$vote = mysqli_fetch_assoc($voteResult);
-				print_r($vote);
-				$votes[$team->id] = Vote::score($vote['first'], $vote['second'], $vote['third'], $vote['total']);
-			}*/
 			return $votes;
 		}
 	}
