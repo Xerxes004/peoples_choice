@@ -1,7 +1,7 @@
 
 <h1 style="text-align: center">Votes for <?php echo $_GET['proj']; ?></h1>
 <div class="chart well">
-	<div id="new-char" style="height:700px"></div>
+	<div id="new-char" style="height:600px"></div>
 	</div>
 <script>
   var voterName = <?php echo '"'.$_SESSION['linux-name'].'"' ?>;

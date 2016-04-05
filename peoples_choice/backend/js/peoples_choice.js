@@ -318,8 +318,18 @@ function resetPassword(){
 	}
 }
 
-function clearTeams(){
+function clearTeams() {
+  $('.team-box').each( function () {
+    var members = $(this).find('.student');
+    var teamnum = $(this).data('teamnum');
 
+    for (var i = 0; i < members.length + 1; i++) {
+      $(members[i]).appendTo('#team-select-div');
+    }
+
+    decrementTeamNums(teamnum);
+    this.remove();
+  });
 }
 
 function saveTeams(){
