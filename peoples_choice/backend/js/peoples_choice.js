@@ -10,6 +10,7 @@ $(document).ready(function(){
   // Logs a user out when clicked in the menu
   $("#user-logout").click(function(evt){
     $.post('index.php', {action:"LOGOUT"});
+    window.location.reload();
     $("#login-field").removeClass('hidden');
     $("#user-tab").addClass('hidden');
     $("#admin-link-header").addClass('hidden');
