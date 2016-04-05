@@ -30,7 +30,7 @@
 				if($row['isAdmin'] != 'false'){
 					$isAdmin = true;
 				}
-				array_push($students, Student::fullWAdmin($row['username'], $row['realName'], $row['pwHash'], $isAdmin));
+				$students[$row['realName']] = Student::fullWAdmin($row['username'], $row['realName'], $row['pwHash'], $isAdmin);
 			}
 			$this->endTransaction;
 

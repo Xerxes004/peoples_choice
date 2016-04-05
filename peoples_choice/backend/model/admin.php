@@ -101,6 +101,7 @@
 
 		public function clearTeamsForProject($project)
 		{
+			echo($project);
 			$this->beginTransaction();
 			$this->queryInTransaction("delete from implementation where implementationID in (select implementationID from team where projectName='$project')");
 			$this->queryInTransaction("delete from team where projectName='$project'");
