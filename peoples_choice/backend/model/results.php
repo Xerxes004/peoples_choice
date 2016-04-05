@@ -11,30 +11,29 @@ class ResultsPage extends Model
 		$sm = new StudentModel();
 		$students = $sm->getStudents();
 
-		print_r($teams);
-
-		$fi = [];
-		$se = [];
-		$th = [];
-		$na = [];
+		$first = [];
+		$second = [];
+		$third = [];
+		$names = [];
 		foreach ($teams as $team) {
 			$id = $team->id;
 			$tmp = '';
 			foreach ($team->members as $member) {
 				$tmp .= $member . ' ';
 			}
-			array_push($na, $tmp);
+			$tmp = trim($tmp);
+			array_push($names, $tmp);
 			unset($tmp);
 			$vote = $votes[$id];
-			array_push($fi, $vote->first);
-			array_push($se, $vote->second);
-			array_push($th, $vote->third);
+			array_push($first, $vote->first);
+			array_push($second, $vote->second);
+			array_push($third, $vote->third);
 		}
 
-		$mymembers = json_encode($na);
-		$myfirst = '['.implode(',', $fi).']';
-		$mysecond = '['.implode(',',$se).']';
-		$mythird = '['.implode(',',$th).']';
+		$mymembers = json_encode($names);
+		$myfirst = '['.implode(',', $first).']';
+		$mysecond = '['.implode(',',$second).']';
+		$mythird = '['.implode(',',$third).']';
 		$chartData = "chart: {
             type: 'bar'
         },
