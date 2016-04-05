@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-  <div class="table-responsive panel-body">
+  <div id="results-table" class="table-responsive panel-body">
     <table class="table table-hover">
       <thead class="thead-inverse">
         <tr>
@@ -12,15 +12,15 @@
           ?>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="project-results">
         <?php 
           $users = $data["students"];
           foreach ($users as $user) {
             $username = $user->username;
             $realName = $user->realName;
-            echo "<tr><td scope='row'><a href='http://judah.cedarville.edu/~$username/cs4220.html'>$realName</a></td>";
+            echo "<tr><td scope='row' class='test'><a href='http://judah.cedarville.edu/~$username/cs4220.html'>$realName</a></td>";
             foreach ($projs as $proj) {
-              echo "<td>score</td>";
+              echo "<td class='score first-place'><b>1</b></td>";
             }
             echo '</tr>';
           } 
