@@ -103,10 +103,12 @@
 		{
 			echo($project);
 			$this->beginTransaction();
+			$this->queryInTransaction('set foreign_key_checks=0');
 			$this->queryInTransaction("delete from implementation where implementationID in (select implementationID from team where projectName='$project')");
 			$this->queryInTransaction("delete from team where projectName='$project'");
-			$this->queryInTransaction("delete from vote where project='$project'");
-			$this->queryInTransaction("delete from writeIn where project=$project");
+			$this->queryInTransaction("delete from vote where projectName='$project'");
+			$this->queryInTransaction("delete from writeIn where projectName='$project'");
+			$this->queryInTransaction('set foreign_key_checks=1');
 			return $this->endTransaction();
 		}
 
