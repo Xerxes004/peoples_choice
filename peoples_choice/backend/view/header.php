@@ -2,7 +2,7 @@
     <div class="modal fade" id="login-modal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog">
         <div class="loginmodal-container">
-          <h1>Login</h1><br>
+          <h1 class="color-me">Login</h1><br>
           <div class="login-modal-error"></div>
           
           <form id="login-form">
@@ -42,7 +42,7 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="./">Home</a></li>
+            <li class="active"><a href="./" class="color-me">Home</a></li>
             <?php 
               $adminClass = $_SESSION['isAdmin'] ? '':'hidden';
               echo "<li id='admin-link-header' class='$adminClass'><a href='?page=admin'>Admin</a></li>";

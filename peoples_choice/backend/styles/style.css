@@ -1,6 +1,15 @@
 .navbar {
-	background-color: #b43649;
+	background-color: lightgrey;
 	border-radius: 0;
+	border: none;
+}
+
+.color-me {
+	color: black;
+}
+
+body {
+	background-color: darkgrey;
 }
 
 #project-results td {
@@ -67,7 +76,10 @@
 }
 
 .voting-panel .panel {
-	border: 1px solid #ebf3fa;
+	border: none;
+}
+
+.vote-panel {
 }
 
 .voting-panel .team {
