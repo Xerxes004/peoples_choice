@@ -1,3 +1,8 @@
+.navbar {
+	background-color: #b43649;
+	border-radius: 0;
+}
+
 #project-results td {
 	height: 60px;
 	text-align: center;

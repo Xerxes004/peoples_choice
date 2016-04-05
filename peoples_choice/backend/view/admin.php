@@ -120,7 +120,7 @@
 					  <p>
 					  	<button onclick="addOneStudentPerTeam()" id="one-per-team">One Student Per Team</button>
 					  </p>
-					  <div class="well droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="team-select">
+					  <div class="well droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="team-select-div">
 					    <?php 
 					    	foreach ($data['students'] as $student) {
 					    		$name = $student->realName;

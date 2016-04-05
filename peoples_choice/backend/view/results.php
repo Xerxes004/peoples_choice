@@ -1,26 +1,32 @@
 
 <h1 style="text-align: center">Votes for <?php echo $_GET['proj']; ?></h1>
-<div class="ct-chart well">
-
-
-
-<div id="new-char" style="min-width: 310px; max-width: 800px; height: 600px; margin: 0 auto"></div>
-</div>
+<div class="chart well">
+	<div id="new-char"></div>
+	</div>
 <script>
   var voterName = <?php echo '"'.$_SESSION['linux-name'].'"' ?>;
   var votesObject = {};
+  votesObject.writeIns = [];
 
   	function addWriteIn() {
-  		if ($("#team-select").val() !== '' && $("#write-in-box").val() !== '') {
-	  		$("#write-in-area").append('<div class="panel panel-default">'+
-	  			'<div class="panel-body">'+
-	  			'<h3>'+$("#team-select").val()+'</h3>'+
-	  			'<hr />'+
-	  			$("#write-in-box").val()+
-	  			'</div>'+
-	  		'</div>');
+  		if ($("#team-select").val() === '') {
+  			displayNotification("invalid-write-in", "<b>Error!</b> No team chosen for write-in.", "danger");
+  		} else if ($("#write-in-box").val() === '') {
+	  		displayNotification("invalid-write-in", "<b>Error!</b> No text given for write-in.", "danger");
 	  	} else {
+	  		var team = $("#team-select").val();
+	  		var write_in = $("#write-in-box").val();
+	  		var str = '<div class="panel panel-default">'+
+						  			'<div class="panel-body">'+
+						  			'<h3>'+team+'</h3>'+
+						  			'<hr />'+
+						  			write_in+
+						  			'</div>'+
+						  		'</div>';
+
+	  		votesObject.writeIns.push({team:write_in});
 	  		
+	  		$("#write-in-area").append(str);	  	
 	  	}
   	}
   
@@ -128,7 +134,7 @@
 			  <label for="write-in">Write In:</label>
 			  <input type="text" name="write-in" class="form-control" id="write-in-box">
 			</div>
-
+			<div id="invalid-write-in"></div>
 			<button onclick="addWriteIn()">Add Write-in</button>
 			<hr />
 
