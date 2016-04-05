@@ -32,19 +32,17 @@ class ResultsPage extends Model
 		$data['labels'] = $na;
 
 		$jsonData = json_encode($data);
+
 		$jsonData .= ",{
-				seriesBarDistance: 5,
 			  	stackBars: true,
 			  	horizontalBars: true,
-			  	onlyInteger: true,
-			  	axisY: {
-			  		offset: 150
-			  	},
 			  	axisX: {
-      				labelInterpolationFnc: function (value, index) {
-      					return index % 5 === 0 ? index : null;
-      				}
-    			},
+			  		onlyInteger: true
+			  	},
+			  	axisY: {
+			  		offset: 150,
+			  		onlyInteger: true
+			  	},
 			}).on('draw', function(data) {
 			  	if(data.type === 'bar') {
 			    	data.element.attr({
@@ -53,7 +51,7 @@ class ResultsPage extends Model
 				  }
 			}";
 
-		return array('json' => $jsonData, 'students' => $students);
+		return array('json' => $jsonData, 'students' => $students, 'teams' => $teams);
 	}
 }
 ?>
