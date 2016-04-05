@@ -1,11 +1,11 @@
 
 <h1 style="text-align: center">Votes for <?php echo $_GET['proj']; ?></h1>
-<div class="ct-chart well"></div>
+<div class="ct-chart well">
 
 
 
-<div id="new-char" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
-
+<div id="new-char" style="min-width: 310px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+</div>
 <script>
   var voterName = <?php echo '"'.$_SESSION['linux-name'].'"' ?>;
   var votesObject = {};
