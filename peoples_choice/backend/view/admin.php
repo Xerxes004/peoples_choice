@@ -134,34 +134,21 @@
 			</div>
 
 			<div id="danger-admin" class="tab-pane fade in panel panel-default">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<b>Set number of projects</b>
-					</div>
-
-					<div class="panel-body">
-						<div class="col-sm-6">
-			                <div class="form-group">
-							  <input type="text" id="set-num-projects">
-							</div>
-							<button onclick="">Set</button>
-						</div>
-					</div>
+				<div class="panel-heading">
+					<b>Set number of projects. THIS WILL RESET PEOPLE'S CHOICE!</b>
 				</div>
 
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<b>RESET PEOPLE'S CHOICE!</b>
-					</div>
-
-					<div class="panel-body">
-						<div class="col-sm-6">
-							<p>Please type "hi mom" to continue.</p>
-			                <div class="form-group">
-							  <input type="text" id="set-num-projects">
-							</div>
-							<button onclick="">RESET</button>
+				<div class="panel-body">
+					<div class="col-sm-6">
+						<p>Please type "hi mom" to continue.</p>
+            <div class="form-group">
+						  <input type="text" id="hi-mom">
 						</div>
+            <div class="form-group">
+            	<label for="set-num-projects">Number of Projects:</label>
+						  <input type="text" class="form-control" id="set-num-projects">
+						</div>
+						<button onclick="">Set</button>
 					</div>
 				</div>
 			</div>
