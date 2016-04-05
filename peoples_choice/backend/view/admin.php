@@ -87,14 +87,6 @@
 						  <button onclick="saveProject()">Save</button>
 						</div>	
 					</div>
-					<div class="col-sm-6">
-						<h3>Set number of projects</h3>
-		                <div class="form-group">
-						  <label for="usr">Project Name:</label>
-						  <input type="text" class="form-control" id="add-project">
-						</div>
-						<button onclick="">Add</button>
-					</div>
 				</div>
 			</div>
 
@@ -145,9 +137,32 @@
 			<div id="danger-admin" class="tab-pane fade in panel panel-default">
 				<div class="panel panel-default">
 					<div class="panel-heading">
+						<b>Set number of projects</b>
 					</div>
 
 					<div class="panel-body">
+						<div class="col-sm-6">
+			                <div class="form-group">
+							  <input type="text" id="set-num-projects">
+							</div>
+							<button onclick="">Set</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<b>RESET PEOPLE'S CHOICE!</b>
+					</div>
+
+					<div class="panel-body">
+						<div class="col-sm-6">
+							<p>Please type "hi mom" to continue.</p>
+			                <div class="form-group">
+							  <input type="text" id="set-num-projects">
+							</div>
+							<button onclick="">RESET</button>
+						</div>
 					</div>
 				</div>
 			</div>
