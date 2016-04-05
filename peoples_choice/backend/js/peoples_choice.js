@@ -200,7 +200,7 @@ function makeTeamDiv() {
             "</div>"+
             "</div>";
 
-  $("#team-area").append($str);
+  $("#team-area").prepend($str);
 
   $("#team-area").data("numteams", numTeams);
 
@@ -355,8 +355,11 @@ function clearTeams() {
   
 }
 
-function saveTeams(){
+function saveTeams() {
 	var project = $("#team-project-dropdown").val();
+  $.post('./', {action:"DESTROY_TEAM", project:project}, function(data){
+    console.log(data);
+  });
 	if(project != ''){
 		$(".team-box").each(function(tbIdx){
 			members = [];
@@ -370,6 +373,7 @@ function saveTeams(){
 			members = null;
 		});
 	}
+
 }
 
 /********************************************************************************
