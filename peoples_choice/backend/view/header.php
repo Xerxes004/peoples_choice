@@ -59,8 +59,6 @@
             <?php echo "<a class='dropdown-toggle $userVisible' id='user-tab' data-toggle='dropdown' href='#'>".$_SESSION['username']; ?><span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#" id="user-logout">Logout</a></li>
-                <li><a href="#">My Results</a></li>
-                <li><a href="#">My Votes</a></li> 
               </ul>
             </li>
             <!--<li><a href="#" class="hidden" id="user-tab">uname</a></li>-->
