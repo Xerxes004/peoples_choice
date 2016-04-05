@@ -19,7 +19,7 @@ class ResultsPage extends Model
 			$id = $team->id;
 			$tmp = '';
 			foreach ($team->members as $member) {
-				$tmp .= $member . ' ';
+				$tmp .= $member . '<br />';
 			}
 			$tmp = trim($tmp);
 			array_push($names, $tmp);
@@ -41,8 +41,7 @@ class ResultsPage extends Model
             text: 'Peoples Choice Results'
         },
         xAxis: {
-            categories: $mymembers,
-        	allowDecimals: false
+            categories: $mymembers
         },
         yAxis: {
             min: 0,
@@ -60,14 +59,18 @@ class ResultsPage extends Model
             }
         },
         series: [{
-            name: 'First',
-            data: $myfirst
+            name: 'Third',
+            data: $mythird,
+            color: '#cd7f32'
+        
         }, {
             name: 'Second',
-            data: $mysecond
+            data: $mysecond,
+            color: '#c0c0c0'
         }, {
-            name: 'Third',
-            data: $mythird
+            name: 'First',
+            data: $myfirst,
+            color: '#ffd700'
         }]";
 
 		return array('json' => $jsonData, 'students' => $students, 'teams'=> $teams, 'highcharts'=>$chartData);

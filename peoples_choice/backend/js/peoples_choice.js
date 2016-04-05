@@ -134,7 +134,7 @@ $(document).ready(function(){
 
 
 function addOneStudentPerTeam() {
-  var students = $("#team-select").find('.student');
+  var students = $("#team-select-div").find('.student');
   $.each(students, function(index, student) {
     var divName = makeTeamDiv($(student).attr('id'));
     $(student).appendTo("#"+divName+" .panel-body");
@@ -147,7 +147,7 @@ function deleteTeam(e) {
   var teamnum = $(teamDiv).data('teamnum');
 
   for (var i = 0; i < members.length + 1; i++) {
-    $(members[i]).appendTo('#team-select');
+    $(members[i]).appendTo('#team-select-div');
   }
 
   decrementTeamNums(teamnum);
