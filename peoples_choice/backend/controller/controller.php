@@ -3,7 +3,6 @@
 require('backend/view/view.php');
 require('backend/model/login.php');
 require('backend/model/peoples_choice.php');
-//require('backend/model/model.php');
 require('backend/model/team.php');
 require('backend/model/student.php');
 require('backend/model/project.php');
@@ -67,13 +66,6 @@ class Controller
 							$success = $am->clearTeamsForProject($_POST['project']);
 							echo(json_encode(array("DESTROY_TEAM"=>$success)));
 							break;
-						case 'VOTE':
-							$vote = json_decode($_POST['vote']);
-							$success = $am->castBallot($vote);
-							echo(json_encode(array("VOTE"=>$success)));
-							print_r($vote);
-							break;
-
 						default:
 							$complete = false;
 						break;
@@ -82,6 +74,7 @@ class Controller
 					$complete = false;
 				}
 				if(!$complete){
+					
 					switch ($_POST['action']) {
 						case 'LOGIN':
 							if ($_POST['username'] && $_POST['password']){
@@ -97,6 +90,14 @@ class Controller
 							session_unset();
 							session_destroy();
 							break;
+						case 'VOTE':
+							$am = new AdminModel();
+							$vote = json_decode($_POST['vote']);
+							$success = $am->castBallot($vote);
+							echo(json_encode(array("VOTE"=>$success)));
+							print_r($vote);
+							break;
+						
 						
 						default:
 							echo(json_encode(array($_POST['action']=>false)));
@@ -109,9 +110,10 @@ class Controller
 				switch ($_GET['action']) {
 					case 'data':
 						switch ($_GET['data']) {
-							case 'TEAM':
-								# code...
-								break;
+							case 'GET_VOTES':
+								$rm = new ResultsPage();
+								echo json_encode($rm->getVoteData($_GET['project']));
+							break;
 							
 							default:
 								# code...
@@ -129,7 +131,6 @@ class Controller
 								$page = new View('results.php');
 								$page->display($data);
 								break;
-
 							case 'admin':
 								if($_SESSION['logged-in'] && $_SESSION['isAdmin']){
 									$model = new AdminModel();

@@ -4,9 +4,11 @@
 	<div id="new-char" style="height:600px"></div>
 	</div>
 <script>
-  var voterName = <?php echo '"'.$_SESSION['linux-name'].'"' ?>;
-  var votesObject = {};
-  votesObject.writeIns = [];
+
+	var CURRENT_PROJECT = <?php echo '"'. $_GET['proj'] . '"'; ?>;
+	var voterName = <?php echo '"'.$_SESSION['linux-name'].'"' ?>;
+	var votesObject = {};
+	votesObject.writeIns = [];
 
   	function addWriteIn() {
   		if ($("#team-select").val() === '') {
@@ -31,7 +33,7 @@
   	}
   
 	function castBallot() {
-		votesObject['project'] = <?php echo '"'.$_GET['proj'] . '"'; ?>;
+		votesObject['project'] = <?php echo '"'. $_GET['proj'] . '"'; ?>;
 		votesObject['first'] = $("#first-pick .team").attr('id');
 		votesObject['second'] = $("#second-pick .team").attr('id');
 		votesObject['third'] = $("#third-pick .team").attr('id');
@@ -52,6 +54,17 @@
 			displayNotification("invalid-vote", "<b>Error!</b> Must specify one team for each placing!", "danger");
 		}
 	}
+
+	$(document).ready(function(){
+		setInterval(function(){
+			$.get('./', {action:"data", data:"GET_VOTES", project:CURRENT_PROJECT}, function(data){
+					var results = JSON.parse(data);
+					$("#new-char").series[0].setData(results[0]);
+					$("#new-char").series[1].setData(results[1]);
+					$("#new-char").series[2].setData(results[2]);
+			});
+		}, 5000);
+	})
 
 	$(function () {
     $('#new-char').highcharts({
