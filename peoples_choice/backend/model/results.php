@@ -68,7 +68,7 @@ class ResultsPage extends Model
             data: $mythird
         }]";
 
-		return array('json' => $jsonData, 'students' => $students, 'highcharts'=>$chartData);
+		return array('json' => $jsonData, 'students' => $students, 'teams'=> $teams, 'highcharts'=>$chartData);
 	}
 }
 ?>
