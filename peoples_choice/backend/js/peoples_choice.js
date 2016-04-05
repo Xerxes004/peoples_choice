@@ -36,6 +36,7 @@ $(document).ready(function(){
         userTab.removeClass('hidden');
         $("#login-field").addClass('hidden');
         $("#login-modal").modal('hide');
+        window.location.reload();
       }else{
         var msg = '<div class="alert alert-danger" role="alert">Name and Password do not match</div>';
         var error = $(".login-modal-error");

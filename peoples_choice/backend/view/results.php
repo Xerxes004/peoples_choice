@@ -26,7 +26,7 @@
 						  			'</div>'+
 						  		'</div>';
 
-	  		votesObject.writeIns.push({team:write_in});
+	  		votesObject.writeIns.push({team:team, writein:write_in});
 	  		
 	  		$("#write-in-area").append(str);	  	
 	  	}

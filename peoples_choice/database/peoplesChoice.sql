@@ -51,14 +51,9 @@ create table wkjs_vote(
 );
 
 create table wkjs_writeIn(
-	username varchar(32),
-	projectName varchar(32),
-	implementationID int,
-	comment varchar(250) not null,
-	primary key(username, projectName, implementationID),
-	foreign key (username) references wkjs_student(username),
-	foreign key (projectName) references wkjs_project(name),
-	foreign key (implementationID) references wkjs_implementation(implementationID)
+	projectName varchar(32) primary key,
+	teamMembers: varchar(100),
+	comment varchar(250) not null
 );
 
 insert into wkjs_project values("Project1", "closed");

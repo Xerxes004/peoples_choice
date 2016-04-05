@@ -118,6 +118,8 @@
 			echo $query;
 			$this->queryInTransaction($query);
 
+			print_r($vote->writeIns);
+
 			$this->endTransaction();
 		}
 	}
