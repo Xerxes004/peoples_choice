@@ -87,7 +87,7 @@
 		public function destroyProject($projectName)
 		{
 			$this->beginTransaction();
-			$this->queryInTransaction("delete from team where project='$projectName'");
+			$this->queryInTransaction("delete from team where projectName='$projectName'");
 			$this->queryInTransaction("delete from project where name='$projectName'");
 			return $this->endTransaction();
 		}
@@ -99,9 +99,14 @@
 			$tm->createTeam($team);
 		}
 
-		public function destroyTeam($teamid)
+		public function clearTeamsForProject($project)
 		{
-			
+			$this->beginTransaction();
+			$this->queryInTransaction("delete from implementation where implementationID in (select implementationID from team where projectName='$project')");
+			$this->queryInTransaction("delete from team where projectName='$project'");
+			$this->queryInTransaction("delete from vote where project='$project'");
+			$this->queryInTransaction("delete from writeIn where project=$project");
+			return $this->endTransaction();
 		}
 
 		public function castBallot($vote)
