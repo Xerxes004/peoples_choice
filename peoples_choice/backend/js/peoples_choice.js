@@ -318,15 +318,11 @@ function resetPassword(){
 	}
 }
 
-function saveTeams(){
-	getTeams();
-}
-
 function clearTeams(){
 
 }
 
-function getTeams(){
+function saveTeams(){
 	var project = $("#team-project-dropdown").val();
 	console.log(project);
 	if(project != ''){

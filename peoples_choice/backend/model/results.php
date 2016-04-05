@@ -8,6 +8,7 @@ class ResultsPage extends Model
 		$votes = $vm->getAllVotesForProject($proj);
 		$tm = new TeamModel();
 		$teams = $tm->getTeamsForProject($proj);
+
 		$sm = new StudentModel();
 		$students = $sm->getStudents();
 
@@ -25,12 +26,14 @@ class ResultsPage extends Model
 			array_push($names, $tmp);
 			unset($tmp);
 			$vote = $votes[$id];
-			array_push($first, $vote->first);
-			array_push($second, $vote->second);
+			array_push($first, $vote->first*3);
+			array_push($second, $vote->second*2);
 			array_push($third, $vote->third);
 		}
 
+
 		$mymembers = json_encode($names);
+
 		$myfirst = '['.implode(',', $first).']';
 		$mysecond = '['.implode(',',$second).']';
 		$mythird = '['.implode(',',$third).']';

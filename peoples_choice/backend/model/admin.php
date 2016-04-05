@@ -103,5 +103,15 @@
 		{
 			
 		}
+
+		public function castBallot($vote)
+		{
+			$this->beginTransaction();
+			$query = 'insert into vote values("'. $vote->voter . '","' . $vote->project . '",' . $vote->first . ', 3), ("'. $vote->voter . '","' . $vote->project . '",' . $vote->second . ', 2), ("'. $vote->voter . '","' . $vote->project . '",' . $vote->third . ', 1)';
+			echo $query;
+			$this->queryInTransaction($query);
+
+			$this->endTransaction();
+		}
 	}
  ?>

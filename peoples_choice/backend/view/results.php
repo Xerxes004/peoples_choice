@@ -31,10 +31,15 @@
   	}
   
 	function castBallot() {
+		votesObject['project'] = <?php echo '"'.$_GET['proj'] . '"'; ?>;
 		votesObject['first'] = $("#first-pick .team").attr('id');
 		votesObject['second'] = $("#second-pick .team").attr('id');
 		votesObject['third'] = $("#third-pick .team").attr('id');
 		votesObject['voter'] = voterName;
+		var vote = JSON.stringify(votesObject);
+		$.post('./', {action:'VOTE', vote:vote}, function(data){
+			console.log(data);
+		});
 	}
 
 	function checkBallot() {
