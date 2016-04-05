@@ -331,22 +331,28 @@ function resetPassword(){
 }
 
 function clearTeams() {
-  $('.team-box').each( function () {
-    var members = $(this).find('.student');
-    var teamnum = $(this).data('teamnum');
+	var project = $("#team-project-dropdown").val();
+	if(project != ''){
+		$('.team-box').each( function () {
+	    var members = $(this).find('.student');
+	    var teamnum = $(this).data('teamnum');
 
-    for (var i = 0; i < members.length + 1; i++) {
-      $(members[i]).appendTo('#team-select-div');
-    }
+	    for (var i = 0; i < members.length + 1; i++) {
+	      $(members[i]).appendTo('#team-select-div');
+	    }
 
-    decrementTeamNums(teamnum);
-    this.remove();
-  });
+	    decrementTeamNums(teamnum);
+	    this.remove();
+	  });
+	  $.post('./', {action:"DESTROY_TEAM", project:project}, function(data){
+	  	console.log(data);
+	  });
+	}
+  
 }
 
 function saveTeams(){
 	var project = $("#team-project-dropdown").val();
-	console.log(project);
 	if(project != ''){
 		$(".team-box").each(function(tbIdx){
 			members = [];

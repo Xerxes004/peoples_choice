@@ -64,7 +64,7 @@ class Controller
 							$success = $am->createTeam($members);
 							break;
 						case 'DESTROY_TEAM':
-							$success = $am->clearTeamsForProject($_GET['project']);
+							$success = $am->clearTeamsForProject($_POST['project']);
 							echo(json_encode(array("DESTROY_TEAM"=>$success)));
 							break;
 						case 'VOTE':
