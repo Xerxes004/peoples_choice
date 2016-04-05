@@ -20,13 +20,13 @@
 	  		var write_in = $("#write-in-box").val();
 	  		var str = '<div class="panel panel-default">'+
 						  			'<div class="panel-body">'+
-						  			'<h3>'+team+'</h3>'+
+						  			'<b>'+team+'</b>'+
 						  			'<hr />'+
 						  			write_in+
 						  			'</div>'+
 						  		'</div>';
 
-	  		votesObject.writeIns.push({team:team, writein:write_in});
+	  		votesObject.writeIns.push({writein:write_in, name:team});
 	  		
 	  		$("#write-in-area").append(str);	  	
 	  	}
@@ -43,6 +43,20 @@
 			console.log(data);
 		});
 		$("#vote-container").addClass('hidden');
+		$.each(votesObject.writeIns, function (index, value) {
+			var writein = value['writein'];
+			var name = value['name'];
+			console.log(writein);
+			console.log(name);
+			var str = "<div class='panel panel-default'>"+
+				"<div class='panel-body'>"+
+				"<b>"+writein+"</b>"+
+				"<hr />"+
+				name+
+				"</div>"+
+				"</div>";
+			$("#display-write-ins").append(str);
+		});
 	}
 
 	function checkBallot() {
@@ -65,9 +79,13 @@
 });
 </script>
 
+<div id="display-write-ins">
+
+</div>
+
 <!-- vote section -->
 
-<div id="vote-container" class="<?php echo ($_SESSION['logged-in'] && !$_GET['voted'] ? '' : 'hidden'); ?>">
+<div id="vote-container" class="<?php #echo ($_SESSION['logged-in'] && !$_GET['voted'] ? '' : 'hidden'); ?>">
 	<div class="row voting-panel">
 		<div id="first-pick" class="col-sm-4">
 			<div class="panel">
@@ -145,8 +163,8 @@
 
 			<div id="write-in-area">
 			</div>
+			<div id="invalid-vote"></div>
+			<button onclick="checkBallot()">Cast Ballot</button>
 		</div>
 	</div>
-	<div id="invalid-vote"></div>
-	<button onclick="checkBallot()">Cast Ballot</button>
 </div>

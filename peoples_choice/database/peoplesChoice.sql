@@ -51,9 +51,10 @@ create table wkjs_vote(
 );
 
 create table wkjs_writeIn(
-	projectName varchar(32) primary key,
-	teamMembers: varchar(100),
-	comment varchar(250) not null
+	projectName varchar(32),
+	teamMembers varchar(100),
+	comment varchar(250) not null,
+	primary key (projectName, teamMembers)
 );
 
 insert into wkjs_project values("Project1", "closed");

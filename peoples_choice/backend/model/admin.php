@@ -118,7 +118,14 @@
 			echo $query;
 			$this->queryInTransaction($query);
 
-			print_r($vote->writeIns);
+			$query = 'insert into wkjs_writeIn values';
+			foreach ($vote->writeIns as $writein) {
+				$query .='("'.$vote->project .'","' . $writein->name . '","' . $writein->writein .'"),';
+			}
+			$query = rtrim($query, ', ');
+
+			echo($query);
+			$this->queryInTransaction($query);
 
 			$this->endTransaction();
 		}
