@@ -231,7 +231,7 @@ function addUser(e) {
   			$("#add-linux").val('');
   			$("#add-user").val('');
 
-  			displayNotification("add-user-notify", "Successfully added <b>" + name + "<b>", "success");
+  			displayNotification("user-add-notify", "Successfully added <b>" + name + "<b>", "success");
   		}
   	});
   }
