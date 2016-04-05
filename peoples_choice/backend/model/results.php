@@ -42,13 +42,15 @@ class ResultsPage extends Model
             text: 'Peoples Choice Results'
         },
         xAxis: {
-            categories: $mymembers
+            categories: $mymembers,
+        	allowDecimals: false
         },
         yAxis: {
             min: 0,
             title: {
                 text: 'Votes'
-            }
+            },
+        	allowDecimals: false
         },
         legend: {
             reversed: true
