@@ -132,18 +132,22 @@ $(document).ready(function(){
   });
 
   $("#team-project-dropdown").change( function () {
-    var teamdivID = makeTeamDiv();
     var projectName = $(this).val();
     var teams = myData.teams[projectName];
     for (var i = 0; i < teams.length; i++) {
-      for (var j = 0; j < teams[i].length; j++) {
-        $("#"+teamdivID).append("<div ondragstart='drag(event)' draggable='true' class='student draggable' id='$linux_user'><b>"+teams[i][j]+"</b></div>");
+      var teamdivID = makeTeamDiv();
+      for (var j = 0; j < teams[i].members.length; j++) {
+        var username = myData.students[teams[i].members[j]].username;
+        $("#team-select-div .student").each(function () {
+          if ($(this).attr('id') === username) {
+            $(this).remove();
+          }
+        });
+        $("#"+teamdivID+" .panel-body").append("<div ondragstart='drag(event)' draggable='true' class='student draggable' id='"+username+"'><b>"+teams[i].members[j]+"</b></div>");
       }
     }
   });
 });
-
-
 
 function addOneStudentPerTeam() {
   var students = $("#team-select-div").find('.student');
@@ -196,7 +200,7 @@ function makeTeamDiv() {
             "</div>"+
             "</div>";
 
-  $("#team-area").append($str);
+  $("#team-area").prepend($str);
 
   $("#team-area").data("numteams", numTeams);
 
@@ -351,8 +355,11 @@ function clearTeams() {
   
 }
 
-function saveTeams(){
+function saveTeams() {
 	var project = $("#team-project-dropdown").val();
+  $.post('./', {action:"DESTROY_TEAM", project:project}, function(data){
+    console.log(data);
+  });
 	if(project != ''){
 		$(".team-box").each(function(tbIdx){
 			members = [];
@@ -366,6 +373,7 @@ function saveTeams(){
 			members = null;
 		});
 	}
+
 }
 
 /********************************************************************************
