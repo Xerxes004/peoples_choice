@@ -1,5 +1,4 @@
 <!-- Login Modal tabindex="-1"-->
-    
     <div class="modal fade" id="login-modal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog">
         <div class="loginmodal-container">
@@ -54,7 +53,7 @@
             $userVisible = $_SESSION['logged-in'] ? '':'hidden';
             $loginVisible = $_SESSION['logged-in'] ? 'hidden':'';
            ?>
-          <ul class='nav navbar-nav navbar-right'>";
+          <ul class='nav navbar-nav navbar-right'>
           
             <li class="dropdown">
             <?php echo "<a class='dropdown-toggle $userVisible' id='user-tab' data-toggle='dropdown' href='#'>".$_SESSION['username']; ?><span class="caret"></span></a>
@@ -73,10 +72,9 @@
     </nav>
 
     <body>
-  <div class="column">
+  <div class="container">
   <div class="row">
   <div class="col-sm-1"></div>
   <div class="col-sm-10">
-
 
 
